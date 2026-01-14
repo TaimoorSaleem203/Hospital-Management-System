@@ -3,12 +3,12 @@ import { NavLink } from 'react-router-dom'
 
 const DoctorPanel = () => {
 
-    const [openDrop, setopenDrop] = useState(null)
+    const [OpenDrop, setOpenDrop] = useState(null)
 
     const menuItems = [
         { name: "Dashboard", link: "/doctor/dashboard", icon: "ri-home-4-line" },
-        { name: "Patients", link: "/doctor/patients", icon: "ri-user-line" , children:[{title:"Patient Registration",path:"/doctors/patients/registration",icon:"ri-user-add-line"},{title:"Patient Directory",path:"/doctors/patients/directory",icon:"ri-file-list-line"}]},
-        { name: "Appointments", link: "/doctor/appointment", icon: "ri-calendar-event-line", children:[{title:"Appointments Registration",path:"/doctor/appointment/registration",icon:"ri-user-add-line"},{title:"Appointments Directory",path:"/doctor/appointment/directory",icon:"ri-file-list-line"}]},
+        { name: "Patients", link: "/doctor/patients", icon: "ri-user-line", children: [{ title: "Patient Registration", path: "/doctors/patients/registration", icon: "ri-user-add-line" }, { title: "Patient Directory", path: "/doctors/patients/directory", icon: "ri-file-list-line" }] },
+        { name: "Appointments", link: "/doctor/appointment", icon: "ri-calendar-event-line", children: [{ title: "Appointments Registration", path: "/doctor/appointment/registration", icon: "ri-user-add-line" }, { title: "Appointments Directory", path: "/doctor/appointment/directory", icon: "ri-file-list-line" }] },
     ]
 
     return (
@@ -21,22 +21,39 @@ const DoctorPanel = () => {
                     return (
                         <>
 
-                        <NavLink to={items.link}>
-                            {({isActive})=>(
-                                <>
-                                    <span className={`flex items-center gap-3
+                            {!items.children ? (
+                                <NavLink to={items.link}>
+                                    {({ isActive }) => (
+                                        <>
+                                            <span className={`flex items-center gap-3
                                         cursor-pointer text-center transition duration-300 ease-out w-full mx-auto 
-                                        max-w-[350px] rounded-lg p-2 py-3 ${isActive?"bg-text-heading text-white ":"hover:bg-primary text-[#e9e9e9]"}`}><i className={`text-xl ${items.icon}`}></i> {items.name}
-                                    </span>
-                                </>
+                                        max-w-[350px] rounded-lg p-2 py-3 ${isActive ? "bg-text-heading text-white " : "hover:bg-primary text-[#e9e9e9]"}`}><i className={`text-xl ${items.icon}`}></i> {items.name}
+                                            </span>
+                                        </>
 
-                            )}
-                        </NavLink>
+                                    )}
+                                </NavLink>
+                            ):
+                            (
+                                <button onClick={()=>setOpenDrop(OpenDrop==items.name? null : items.name)} 
+                                className='flex items-center justify-between w-full p-3 rounded-lg text-white'>
+                                    <span>
+                                        <i className={`text-xl ${items.icon}`}>
+                                            {items.name}
+                                        </i>
+                                    </span>
+
+                                    <i className={`ri-arrow-down-s-line transition-transform ${OpenDrop == items.name? "rotate-180":""}`}></i>
+                                </button>
+                            )
+                            }
+
+
                         </>
                     )
                 })}
             </div>
-            
+
             <span className="text-white cursor-pointer flex items-center gap-2 px-10 pt-3 p-2 text-lg absolute bottom-0 right-0 mb-3 border-white/30 border-t w-full mx-auto"><i class="ri-logout-box-r-line"></i>Log Out</span>
         </aside>
     )
