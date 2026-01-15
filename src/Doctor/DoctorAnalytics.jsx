@@ -21,9 +21,6 @@ const DoctorAnalytics = () => {
             </div>
         </div>
 
-
-            {/* <Progress progress={23} /> */}
-        
         </>
 
     )

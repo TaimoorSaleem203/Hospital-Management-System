@@ -8,7 +8,7 @@ const PatientPanel = () => {
     ]
 
     return (
-        <aside className={`fixed left-0 top-0 z-10 p-5 font-poppins items-start flex flex-col min-h-screen bg-gradient-to-b to-bg-primary from-[#0FB9B1] to-[#009E9A] w-[300px]`}>
+        <aside className={`relative max-w-[280px] p-5 font-poppins items-start flex flex-shrink-0 flex-col min-h-screen bg-gradient-to-b to-bg-primary from-[#0FB9B1] to-[#009E9A] w-[300px]`}>
             <h1 className="border-[#d7d9dd] px-5 text-[30px] cursor-pointer text-white font-normal">Medi<span className="font-semibold">Core</span></h1>
 
 

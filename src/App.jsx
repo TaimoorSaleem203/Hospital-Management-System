@@ -9,8 +9,12 @@ import DoctorAppointments from './Doctor/DoctorAppointments';
 import PatientPage from './Doctor/PatientPage';
 import PatientsDirectory from './Doctor/PatientsDirectory';
 import DoctorPatientList from './Doctor/DoctorPatientList';
+import {useState} from "react";
 
 const App = () => {
+  const [selectedRole, setSelectedRole] = useState("portal");
+
+  const roles = ["Doctor", "Patient", "Admin"];
   return (
 
     <>
@@ -18,6 +22,11 @@ const App = () => {
       <Route element={<Layout />}>
         <Route path='/' element={<LandPage />}></Route>
         <Route path='/portal' element={<Auth />}></Route>
+          {roles.map((role)=>{
+            return (
+                <Route key={role} path={`/${role.toLowerCase()}`} element={<Auth />}></Route>
+            )
+          })}
       </Route>
 
       <Route>

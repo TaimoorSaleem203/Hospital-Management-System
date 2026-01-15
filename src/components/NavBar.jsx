@@ -2,9 +2,12 @@ import styles from "../styles"
 import { Link, NavLink } from 'react-router-dom'
 
 const NavBar = () => {
+
+  const roles = ["portal","doctor", "patient", "admin"];
+
   const menuItems = [
     { name: "Home", link: "/" },
-    { name: "Portal", link: "/portal" },
+    { name: "Portal", link: `/portal` }
   ]
 
   return (

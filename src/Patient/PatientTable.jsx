@@ -3,7 +3,7 @@ import DoctorProf from "../assets/DoctorProf.png"
 const PatientTable = () => {
     return (
         <>
-            <div className="p-5 px-10 w-full mx-auto min-h-[350px] shadow-lg shadow-text-body/15 rounded-lg bg-white">
+            <div className="p-5 px-10 w-full mx-auto max-h-full shadow-lg shadow-text-body/15 rounded-lg bg-white">
                 <div className="flex items-center justify-between border-b border-[#d7d9dd] pb-4">
                     <h1 className="border-[rgb(215,217,221)] text-text-heading text-xl font-semibold">My Appointments</h1>
                     <p className="text-primary text-sm cursor-pointer hover:border-b border-primary">View All</p>

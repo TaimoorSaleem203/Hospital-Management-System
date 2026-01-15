@@ -14,10 +14,9 @@ const PatientDashboard = () => {
 
         <PatientHeader />
 
-        <div className="px-4 sm:px-6 lg:px-10 max-w-[1300px] ml-auto">
+        <div className="px-4 sm:px-6 lg:px-10 max-w-[1300px] mx-auto">
           <div className="flex flex-col gap-10">
 
-            {/* Welcome Card */}
             <div className="mt-8 rounded-lg p-10 min-h-[180px]
               shadow-lg shadow-text-body/30
               bg-gradient-to-tr from-[#0FB9B1] to-[#009E9A]">
