@@ -7,6 +7,7 @@ import Appointments from './Patient/Appointments'
 import DoctorDashboard from './Doctor/DoctorDashboard';
 import DoctorAppointments from './Doctor/DoctorAppointments';
 import PatientPage from './Doctor/PatientPage';
+import PatientsDirectory from './Doctor/PatientsDirectory';
 
 const App = () => {
   return (
@@ -25,8 +26,9 @@ const App = () => {
 
       <Route>
         <Route path='/doctor/dashboard' element={<DoctorDashboard />}></Route>
-        <Route path='/doctor/patients' element={<PatientPage />}></Route>
-        <Route path='/doctor/appointment' element={<DoctorAppointments />}></Route>
+        <Route path='/doctors/patients/registration' element={<PatientPage />}></Route>
+        <Route path='/doctors/patients/directory' element={<PatientsDirectory />}></Route>
+        {/* <Route path='/doctor/appointment' element={<DoctorAppointments />}></Route> */}
       </Route>
     </Routes>
     

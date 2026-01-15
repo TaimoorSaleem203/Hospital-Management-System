@@ -15,7 +15,7 @@ const DoctorDashboard = () => {
 
         <DoctorHeader />
 
-        <div className="px-4 sm:px-6 lg:px-10 max-w-[960px] sm:max-w-[1300px] ml-auto">
+        <div className="px-4 sm:px-6 lg:px-10 lg:max-w-[1100px] sm:max-w-[1300px] ml-auto">
           <div className="flex flex-col gap-10">
 
             {/* Welcome Card */}
