@@ -11,7 +11,7 @@ const AppointmentsForm = () => {
     const [action, setAction] = useState("");
     const [active, setActive] = useState("");
     return (
-        <div className="max-w-full p-8 h-full flex bg-white border shadow-sm rounded-2xl flex-col gap-5">
+        <div className="min-w-full mx-auto p-8 h-full flex bg-white border shadow-sm rounded-2xl flex-col gap-5">
             <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl font-semibold text-text-heading">Appointment Form</h2>
                 <span className="bg-blue-50 text-primary px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
@@ -19,10 +19,10 @@ const AppointmentsForm = () => {
                 </span>
             </div>
 
-            <form className="space-y-4 w-full">
-                <div className="relative w-full border-b border-slate-200 pb-4">
+            <form className="relative space-y-4 w-full">
+                <div className="border-b border-slate-200 pb-4">
                     <i className="absolute flex items-center top-[9px] left-3 ri-search-line text-slate-500"></i>
-                    <input type="text" placeholder="ID or Patients Name" className="pl-10 pr-50 outline-none bg-slate-50 px-4 py-2 border border-slate-200 mx-auto rounded-lg focus:ring-2 focus:ring-blue-500/20" />
+                    <input type="text" placeholder="ID or Patients Name" className="min-w-full w-full pl-10 pr-50 outline-none bg-slate-50 px-4 py-2 border border-slate-200 mx-auto rounded-lg focus:ring-2 focus:ring-blue-500/20" />
                 </div>
                 <div className="grid items-center grid-cols-2 gap-4">
                     <div>
@@ -49,7 +49,7 @@ const AppointmentsForm = () => {
                     </div>
                 </div>
 
-                <div className="flex gap-5 items-center">
+                <div className="grid grid-cols-2 items-center">
                     <div>
                         <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
                             Appointment Date

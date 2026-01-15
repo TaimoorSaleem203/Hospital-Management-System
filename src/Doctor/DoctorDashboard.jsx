@@ -15,7 +15,7 @@ const DoctorDashboard = () => {
 
         <DoctorHeader />
 
-        <div className="px-4 sm:px-6 lg:px-10 lg:max-w-[1100px] sm:max-w-[1300px] ml-auto">
+        <div className="px-4 sm:px-6 lg:px-10 max-w-[1300px] mx-auto">
           <div className="flex flex-col gap-10">
 
             {/* Welcome Card */}
@@ -33,12 +33,12 @@ const DoctorDashboard = () => {
 
               <div className="flex items-center gap-5">
 
-                <Link to="/doctor/patients">
+                <Link to="/doctors/patients/directory">
                   <button className="mt-8 bg-white text-primary font-semibold px-6 py-2 rounded-lg active:scale-95">
                     View Patients
                   </button>
                 </Link>
-                <Link to="/doctor/appointment">
+                <Link to="/doctor/appointment/list">
                   <button className="mt-8 bg-text-heading text-white px-6 py-2 rounded-lg active:scale-95">
                     View Appointments 
                   </button>

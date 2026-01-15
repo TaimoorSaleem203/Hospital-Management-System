@@ -1,7 +1,7 @@
 
 const DoctorHeader = () => {
     return (
-        <div className="relative ml-auto lg:max-w-[1080px] sm:max-w-[1300px] min-h-[82px] bg-white flex justify-between items-center px-10 border-b border-[#d7d9dd]">
+        <div className="relative ml-auto max-w-[1080px] sm:max-w-[1330px] min-h-[82px] bg-white flex justify-between items-center px-10 border-b border-[#d7d9dd]">
             <h1 className="text-text-heading text-2xl font-semibold">Health Overview</h1>
             <i class="relative cursor-pointer ri-notification-line font-semibold pr-5 text-xl border-r border-[#d7d9dd]"></i>
             <span className="absolute right-[530px] bottom-11 bg-red-500 w-[10px] h-[10px] rounded-full"></span>

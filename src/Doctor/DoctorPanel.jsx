@@ -8,11 +8,11 @@ const DoctorPanel = () => {
     const menuItems = [
         { name: "Dashboard", link: "/doctor/dashboard", icon: "ri-home-4-line" },
         { name: "Patients", link: "/doctor/patients", icon: "ri-user-line", children: [{ title: "Registration Form", path: "/doctors/patients/registration", icon: "ri-user-add-line" }, { title: "Directory", path: "/doctors/patients/directory", icon: "ri-file-list-line" }] },
-        { name: "Appointments", link: "/doctor/appointment", icon: "ri-calendar-event-line", children: [{ title: "Appointments Registration", path: "/doctor/appointment/registration", icon: "ri-user-add-line" }, { title: "Appointments Directory", path: "/doctor/appointment/directory", icon: "ri-file-list-line" }] },
+        { name: "Appointments", link: "/doctor/appointment", icon: "ri-calendar-event-line", children: [{ title: "Appointment Form", path: "/doctor/appointment/form", icon: "ri-user-add-line" }, { title: "Appointment List", path: "/doctor/appointment/list", icon: "ri-file-list-line" }] },
     ]
 
     return (
-        <aside className={`fixed left-0 top-0 z-10 lg:max-w-[270px] sm:max-w-[300px] p-5 font-poppins items-start flex flex-col min-h-screen bg-gradient-to-b to-bg-primary from-[#0FB9B1] to-[#009E9A] w-[300px]`}>
+        <aside className={`relative max-w-[280px] p-5 font-poppins items-start flex flex-shrink-0 flex-col min-h-screen bg-gradient-to-b to-bg-primary from-[#0FB9B1] to-[#009E9A] w-[300px]`}>
             <h1 className="border-[#d7d9dd] px-5 text-[30px] cursor-pointer text-white font-normal">Medi<span className="font-semibold">Core</span></h1>
 
 
