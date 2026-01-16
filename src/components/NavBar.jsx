@@ -1,9 +1,8 @@
 import styles from "../styles"
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, Outlet } from 'react-router-dom'
 
 const NavBar = () => {
 
-  const roles = ["portal","doctor", "patient", "admin"];
 
   const menuItems = [
     { name: "Home", link: "/" },
@@ -12,7 +11,7 @@ const NavBar = () => {
 
   return (
     <nav className={`${styles.paddingX} py-8 font-poppins`}>
-      <div className="max-w-7x w-full mx-auto flex items-center justify-between">
+      <div className="max-w-7xl w-full mx-auto flex items-center justify-between">
         <Link to="/" className="text-[30px] cursor-pointer text-primary-dark font-medium">Medi<span className="font-semibold">Core</span></Link>
 
         <div className="max-w-7xl mx-auto -translate-x-20">
@@ -28,7 +27,7 @@ const NavBar = () => {
           >
             {menuItems. map((item) => (
               <li key={item.name} className="relative">
-                <NavLink to={item.link} className="relative transition z-10 px-10 py-2 cursor-pointer">
+                <NavLink to={item.link} end={item.link === "/"} className="relative transition z-10 px-10 py-2 cursor-pointer">
                   {({ isActive }) => (
                     <>
                       <span

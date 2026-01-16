@@ -1,6 +1,6 @@
 import LandPage from './components/LandPage';
 import Auth from './components/Auth'
-import {Route,Routes} from 'react-router-dom'
+import {Route,Routes,useParams} from 'react-router-dom'
 import Layout from './components/Layout';
 import PatientDashboard from './Patient/PatientDashboard';
 import Appointments from './Patient/Appointments'
@@ -12,21 +12,18 @@ import DoctorPatientList from './Doctor/DoctorPatientList';
 import {useState} from "react";
 
 const App = () => {
-  const [selectedRole, setSelectedRole] = useState("portal");
 
-  const roles = ["Doctor", "Patient", "Admin"];
+  const {role} = useParams()
   return (
 
     <>
     <Routes>
       <Route element={<Layout />}>
-        <Route path='/' element={<LandPage />}></Route>
-        <Route path='/portal' element={<Auth />}></Route>
-          {roles.map((role)=>{
-            return (
-                <Route key={role} path={`/${role.toLowerCase()}`} element={<Auth />}></Route>
-            )
-          })}
+        <Route path='/' element={<LandPage />} />
+        <Route path='/portal' element={<Auth />}>
+          <Route path='patient' element={<Auth />}/>
+          <Route path='doctor' element={<Auth />}/>
+        </Route>
       </Route>
 
       <Route>
