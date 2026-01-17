@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import { useState } from 'react'
 
 const AdminDoctorsForm = () => {
     const [fname, setFName] = useState("");
@@ -25,7 +25,7 @@ const AdminDoctorsForm = () => {
                 {/*    <i className="absolute flex items-center top-[9px] left-3 ri-search-line text-slate-500"></i>*/}
                 {/*    <input type="text" placeholder="ID or Patients Name" className="min-w-full w-full pl-10 pr-50 outline-none bg-slate-50 px-4 py-2 border border-slate-200 mx-auto rounded-lg focus:ring-2 focus:ring-blue-500/20" />*/}
                 {/*</div>*/}
-                <div className="grid items-center grid-cols-2 gap-4">
+                <div className="grid items-center grid-cols-3 gap-4">
                     <div>
                         <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
                             First Name
@@ -48,17 +48,18 @@ const AdminDoctorsForm = () => {
                             className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
                         />
                     </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4 items-center">
                     <div>
                         <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
                             Email
                         </label>
                         <input
                             className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
-                            type="text" />
+                            type="text" value={email} onChange={() => setEmail(email)} />
                     </div>
+                </div>
+
+                <div className="grid grid-cols-3 gap-4 items-center">
+
                     <div>
                         <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
                             Contact
@@ -67,18 +68,43 @@ const AdminDoctorsForm = () => {
                             className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
                             type="number" />
                     </div>
-                </div>
 
-
-                    <div className="w-full">
-                        <label className="block flex flex-col gap-1 text-xs font-semibold text-slate-500 uppercase mb-1">
-                            Do you have any medical assistant experience?
-                           <span className="text-black/30">(please mention your position)</span>
+                    <div>
+                        <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
+                            Age
                         </label>
                         <input
                             className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
-                            type="text" />
+                            type="number" value={age} onChange={()=>setAge(age)}/>
                     </div>
+
+                    <div>
+                        <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
+                            Gender
+                        </label>
+                        <select
+                            value={gender}
+                            onChange={(e) => setGender(e.target.value)}
+                            className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
+                        >
+                            <option value="">Select</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div className="w-full">
+                    <label className="block flex flex-col gap-1 text-xs font-semibold text-slate-500 uppercase mb-1">
+                        Do you have any medical assistant experience?
+                        <span className="text-black/30">(please mention your position)</span>
+                    </label>
+                    <input
+                        className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
+                        type="text" />
+                </div>
 
                 <div>
                     <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">

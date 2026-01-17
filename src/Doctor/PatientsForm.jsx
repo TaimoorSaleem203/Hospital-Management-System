@@ -46,7 +46,7 @@ const PatientsForm = () => {
   // };
 
   return (
-    <div className="max-w-full p-8 h-full flex bg-white border shadow-sm rounded-2xl flex-col gap-5">
+    <div className="mb-10 w-full p-8 h-full flex bg-white border shadow-sm rounded-2xl flex-col gap-5">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-xl font-semibold text-text-heading">Registration</h2>
         <span className="bg-blue-50 text-primary px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
