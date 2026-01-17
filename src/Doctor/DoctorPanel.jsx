@@ -7,7 +7,7 @@ const DoctorPanel = () => {
 
     const menuItems = [
         { name: "Dashboard", link: "/doctor/dashboard", icon: "ri-home-4-line" },
-        { name: "Patients", link: "/doctor/patients", icon: "ri-user-line", children: [{ title: "Registration Form", path: "/doctors/patients/registration", icon: "ri-user-add-line" }, { title: "Directory", path: "/doctors/patients/directory", icon: "ri-file-list-line" }] },
+        { name: "Patients", link: "/doctor/patients", icon: "ri-user-line", children: [{ title: "Registration Form", path: "/doctor/patients/registration", icon: "ri-user-add-line" }, { title: "Directory", path: "/doctor/patients/directory", icon: "ri-file-list-line" }] },
         { name: "Appointments", link: "/doctor/appointment", icon: "ri-calendar-event-line", children: [{ title: "Appointment Form", path: "/doctor/appointment/form", icon: "ri-user-add-line" }, { title: "Appointment List", path: "/doctor/appointment/list", icon: "ri-file-list-line" }] },
     ]
 

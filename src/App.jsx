@@ -17,6 +17,8 @@ import AdminDoctors from "./Admin/AdminDoctors.jsx";
 import AdminDoctorsDirectory from "./Admin/AdminDoctorsDirectory.jsx";
 import AdminPatients from './Admin/AdminPatients.jsx';
 import AdminPatientsDirectory from './Admin/AdminPatientsDirectory.jsx';
+import AdminAppointment from './Admin/AdminAppointment.jsx';
+import AdminAppointmentList from './Admin/AdminAppointmentList.jsx';
 
 const App = () => {
 
@@ -48,6 +50,8 @@ const App = () => {
         <Route path='/admin/doctors/directory' element={<AdminDoctorsDirectory />}></Route>
         <Route path='/admin/patients/registration' element={<AdminPatients />}></Route>
         <Route path='/admin/patients/directory' element={<AdminPatientsDirectory />}></Route>
+        <Route path='/admin/appointment/form' element={<AdminAppointment />}></Route>
+        <Route path='/admin/appointment/list' element={<AdminAppointmentList />}></Route>
       </Route>
     </Routes>
 
