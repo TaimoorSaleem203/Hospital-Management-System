@@ -3,7 +3,6 @@ import { Link, NavLink, Outlet } from 'react-router-dom'
 
 const NavBar = () => {
 
-
   const menuItems = [
     { name: "Home", link: "/" },
     { name: "Portal", link: `/portal` }
@@ -17,7 +16,6 @@ const NavBar = () => {
         <div className="max-w-7xl mx-auto -translate-x-20">
 
           <ul
-            // ref={menuContainerRef}
             className="
               relative flex items-center p-3 px-1
               rounded-full border border-border

@@ -1,5 +1,4 @@
 
-
 const PatientTable = () => {
 
     return (

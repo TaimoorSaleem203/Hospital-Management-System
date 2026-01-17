@@ -1,16 +1,13 @@
 import AuthRect from "../assets/AuthRect.png"
 import DoctorImg from "./DoctorImg"
 import {useState} from "react";
-import {Link} from "react-router-dom";
 
 const Auth = () => {
 
   const [selectedRole, setSelectedRole] = useState("");
   const roles = ["Doctor", "Patient", "Admin"];
+  const [role, setRole] = useState("doctor");
 
-  const urlChange = (pathName) =>{
-    window.location.pathname = pathName
-  }
 
   return (
     <>
@@ -24,7 +21,7 @@ const Auth = () => {
           {roles.map((role)=>{
             return (
                 <div className="flex items-center gap-2">
-                  <input type="radio" onClick={()=>urlChange(`/${role.toLowerCase()}`)} className={`w-4 h-4 accent-primary-dark outline-none`} value={role} onChange={()=>setSelectedRole(role)} checked={selectedRole===role}/>
+                  <input type="radio" onClick={()=>setRole(role)} className={`w-4 h-4 accent-primary-dark outline-none`} onChange={()=>setSelectedRole(role)} checked={selectedRole===role}/>
                   <label className={`${selectedRole === role? "text-text-heading":"text-text-body"}`}>{role}</label>
                 </div>
             )
@@ -41,7 +38,8 @@ const Auth = () => {
             <input className="p-3 rounded-xl text-text-heading focus:ring-2 focus:ring-primary outline-none" type="password" placeholder="••••••••" />
           </div>
 
-          <button className="bg-primary hover:bg-primary/90 transition focus:ring-2 focus:ring-primary focus:outline-none active:scale-95 rounded-xl p-3 text-white mt-5">Access Portal</button>
+          <button onClick={()=> (window.location.href = `${role.toLowerCase()}/dashboard`)}
+           className="bg-primary hover:bg-primary/90 transition focus:ring-2 focus:ring-primary focus:outline-none active:scale-95 rounded-xl p-3 text-white mt-5">Access Portal</button>
         </div>
       </div>
     </div>
