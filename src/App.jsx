@@ -4,13 +4,13 @@ import Auth from './components/Auth';
 import {Route,Routes} from 'react-router-dom';
 
 import Layout from './components/Layout';
-import PatientDashboard from './Patient/PatientDashboard';
 import Appointments from './Patient/Appointments'
 import DoctorDashboard from './Doctor/DoctorDashboard';
 import DoctorAppointments from './Doctor/DoctorAppointments';
+import DoctorPatientList from './Doctor/DoctorPatientList';
+import PatientDashboard from './Patient/PatientDashboard';
 import PatientPage from './Doctor/PatientPage';
 import PatientsDirectory from './Doctor/PatientsDirectory';
-import DoctorPatientList from './Doctor/DoctorPatientList';
 
 import AdminDashboard from "./Admin/AdminDashboard.jsx";
 import AdminDoctors from "./Admin/AdminDoctors.jsx";

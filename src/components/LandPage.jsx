@@ -4,6 +4,7 @@ import maleDoctor from "../assets/maleDoctor.png"
 import Content from "./Content.jsx"
 
 const LandPage = () => (
+
   <section
     className="relative mx-auto w-full font-poppins bg-no-repeat bg-cover bg-center"
     style={{ backgroundImage: `url(${bg})` }}

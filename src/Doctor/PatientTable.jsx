@@ -1,5 +1,12 @@
+import {setLocalStorage} from "../components/addLocalStorage"
 
-const PatientTable = () => {
+const PatientTable = ({patientData,setPatientData}) => {
+
+    const onDelete = (indx) => {
+        setPatientData(patientData.filter((item,index)=>index!==indx))   
+    }
+    setLocalStorage(patientData)
+
 
     return (
         <>
@@ -41,15 +48,17 @@ const PatientTable = () => {
                                 </tr>
                             </thead>
 
-                            {/* <tbody>
-                                {patients.map((patient, index) => {
+                            <tbody>
+                                    
+                                        
+                            {patientData.map((patient, index) => {
                                     
                                     return (
-                                        <tr key={index} onClick={() => onSelect(index)} className="bg-slate-50 border-b border-slate-200 hover:bg-slate-100 border-y-1 cursor-pointer">
+                                        <tr key={index} className="bg-slate-50 border-b border-slate-200 hover:bg-slate-100 border-y-1 cursor-pointer">
                                             <td className='px-6 py-4 text-1xl font-semibold text-slate-700 uppercase leading-2 tracking-wider'>{`P${String(index + 1).padStart(3, "0")}`}</td>
                                             <td className='px-6 py-4 text-1xl font-semibold text-slate-700 leading-2'>{patient.fname} {patient.lname}</td>
                                             <td className='px-6 py-4 text-1xl font-semibold text-slate-700 leading-2'>{patient.age} / {patient.gender}</td>
-                                            <td className='px-6 py-4 text-1xl font-semibold text-slate-700 leading-2'>{patient.blood_group}</td>
+                                            <td className='px-6 py-4 text-1xl font-semibold text-slate-700 leading-2'>{patient.blood}</td>
                                             <td className='px-6 py-4 text-1xl font-semibold text-slate-700 leading-2'>{patient.contact}</td>
                                             <td className='px-6 py-4 text-1xl font-semibold text-slate-700 leading-2'>{patient.action}</td>
                                             {patient.active == "Active" ? <td className='px-6 py-4 text-1xl font-semibold text-green-700 leading-2'>Active</td> : <td className='px-6 py-4 text-1xl font-semibold text-red-700 leading-2'>Block</td>}
@@ -60,17 +69,18 @@ const PatientTable = () => {
                                                     onDelete(index)
                                                 }
                                             }} className="ri-delete-bin-fill"></i></td>
-                                        </tr>
+                                         </tr>
 
-                                    )
-                                })}
+                                     )
+                            })}
 
-                                {patients.length == 0 && (
+                                 {patientData.length == 0 && (
                                     <tr>
-                                        <td colSpan={10} className='px-6 py-4 text-1xl font-semibold text-slate-700 leading-2'>No Records</td>
-                                    </tr>
-                                )}
-                            </tbody> */}
+                                         <td colSpan={10} className='px-6 py-4 text-1xl font-semibold text-slate-700 leading-2'>No Records</td>
+                                     </tr>
+                                 )}
+                             </tbody>
+                            
                         </table>
                     </div>
                 </div>

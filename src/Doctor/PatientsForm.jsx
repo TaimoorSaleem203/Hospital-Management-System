@@ -1,21 +1,9 @@
 import { useState } from "react";
-// import { useForm, useController } from "react-hook-form";
-import styles from "../styles";
+import {setLocalStorage} from "../components/addLocalStorage"
 
-// const emptyForm = {
-//   fname: "",
-//   lname: "",
-//   email: "",
-//   age: "",
-//   gender: "",
-//   blood_group: "",
-//   contact: "",
-//   action: "",
-//   active: ""
-// };
 
-const PatientsForm = () => {
-  // UI state only (for controlled inputs)
+const PatientsForm = ({patientData,setPatientData}) => {
+
   const [fname, setFName] = useState("");
   const [lname, setLName] = useState("");
   const [email, setEmail] = useState("");
@@ -25,7 +13,8 @@ const PatientsForm = () => {
   const [contact, setContact] = useState("");
   const [action, setAction] = useState("");
   const [active, setActive] = useState("");
-
+  
+  
   // ❌ Form logic disabled
   // const {
   //   register,
@@ -44,6 +33,17 @@ const PatientsForm = () => {
   // const onSubmit = async (data) => {
   //   await delay(2);
   // };
+  const addPatient = () => {
+    if(!fname || !lname || !email || !age || !gender || !blood || !contact || !action || !active){
+      return
+    }
+
+    setPatientData(prev=>[...prev,{"fname":fname,"lname":lname,"email":email,"age":age,"gender":gender,"blood":blood,"contact":contact,"action":action,"active":active}])
+
+    setFName("") ; setLName("") ; setEmail("") ; setAge("") ; setGender("") ; setBlood("") ; setContact("") ; setAction("") ; setActive("")
+    
+  }
+  setLocalStorage(patientData)
 
   return (
     <div className="mb-10 w-full p-8 h-full flex bg-white border shadow-sm rounded-2xl flex-col gap-5">
@@ -190,7 +190,7 @@ const PatientsForm = () => {
         <button
           type="button"
           className="w-full mt-10 bg-primary-dark hover:bg-primary text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-200"
-        >
+        onClick={()=>addPatient()} >
           Add Patient
         </button>
       </form>

@@ -10,6 +10,8 @@ const AdminAppointmentForm = () => {
     const [contact, setContact] = useState("");
     const [action, setAction] = useState("");
     const [active, setActive] = useState("");
+
+    
     return (
         <div className="min-w-full mx-auto p-8 h-full flex bg-white border shadow-sm rounded-2xl flex-col gap-5">
             <div className="flex items-center justify-between mb-6">
