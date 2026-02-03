@@ -199,7 +199,7 @@ const PatientsForm = ({patientData,setPatientData}) => {
         <button
           type="button"
           className="w-full mt-10 bg-primary-dark hover:bg-primary text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-200"
-        onClick={()=>addPatient()} >
+        onClick={()=>(confirm(`Would you like to confirm the registration of ${fname} ${lname}!`) && addPatient())} >
           Add Patient
         </button>
       </form>

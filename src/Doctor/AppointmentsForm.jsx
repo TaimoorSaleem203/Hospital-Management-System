@@ -1,31 +1,29 @@
 import { useState } from "react";
 import { setAppointment } from "../components/addLocalStorage";
 
-const AppointmentsForm = ({appoint,setAppoint}) => {
+const AppointmentsForm = ({ appoint, setAppoint }) => {
     const [fname, setFName] = useState("");
     const [lname, setLName] = useState("");
     const [date, setDate] = useState("");
     const [time, setTime] = useState("");
     const [reason, setReason] = useState("");
     const [action, setAction] = useState("");
-    
-    let count = 0
-    const sequenceCounter = () =>{
-        count += 1
-        return `P00${count}`
+
+    const fetchID = () => {
+        return
     }
 
-    const AppointmentAdd = () =>{
-        if (!fname || !lname || !date || !time || !reason || !action){
+    const AppointmentAdd = () => {
+        if (!fname || !lname || !date || !time || !reason || !action) {
             return
         }
-        
-        setAppoint(prev=>[...prev,{"ID":sequenceCounter(),"fname":fname,"lname":lname,"date":date,"time":time,"reason":reason,"action":action}])
-        setFName("") ; setLName("") ; setDate("") ; setTime("") ; setReason("") ; setAction("")
+
+        setAppoint(prev => [...prev, { "ID": sequenceCounter(), "fname": fname, "lname": lname, "date": date, "time": time, "reason": reason, "action": action }])
+        setFName(""); setLName(""); setDate(""); setTime(""); setReason(""); setAction("")
     }
     setAppointment(appoint)
 
-    
+
     return (
         <div className="min-w-full mx-auto p-8 h-full flex bg-white border shadow-sm rounded-2xl flex-col gap-5">
             <div className="flex items-center justify-between mb-6">
@@ -53,7 +51,7 @@ const AppointmentsForm = ({appoint,setAppoint}) => {
                         />
                     </div>
 
-                    <div>       
+                    <div>
                         <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
                             Last Name
                         </label>
@@ -72,7 +70,7 @@ const AppointmentsForm = ({appoint,setAppoint}) => {
                         </label>
                         <input
                             className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
-                           value={date} onChange={(e)=>setDate(e.target.value)} type="date" />
+                            value={date} onChange={(e) => setDate(e.target.value)} type="date" />
                     </div>
                     <div>
                         <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
@@ -80,7 +78,7 @@ const AppointmentsForm = ({appoint,setAppoint}) => {
                         </label>
                         <input
                             className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
-                            type="time" value={time} onChange={(e)=>setTime(e.target.value)} />
+                            type="time" value={time} onChange={(e) => setTime(e.target.value)} />
                     </div>
                 </div>
 
@@ -109,7 +107,7 @@ const AppointmentsForm = ({appoint,setAppoint}) => {
                     </label>
                     <textarea
                         value={reason}
-                        onChange={(e)=>setReason(e.target.value)}
+                        onChange={(e) => setReason(e.target.value)}
                         rows={3}
                         placeholder="Symptoms / purpose" className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
                     />
@@ -118,7 +116,7 @@ const AppointmentsForm = ({appoint,setAppoint}) => {
                 <button
                     type="button"
                     className="w-full mt-10 bg-primary-dark hover:bg-primary text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-200"
-                    onClick={()=>AppointmentAdd()}
+                    onClick={() => AppointmentAdd()}
                 >
                     Add Appointment
                 </button>

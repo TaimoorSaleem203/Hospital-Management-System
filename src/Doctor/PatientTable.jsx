@@ -23,7 +23,7 @@ const PatientTable = ({ patientData, setPatientData }) => {
                         <p className="text-slate-500">Manage and view records for all registered patients.</p>
                     </div>
 
-                    <span className="text-slate-500 text-md">0 Records Found</span>
+                    <span className="text-slate-500 text-md">{patientData.length} Records Found</span>
 
                 </header>
 
