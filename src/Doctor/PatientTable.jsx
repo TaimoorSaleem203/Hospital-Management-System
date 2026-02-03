@@ -1,12 +1,18 @@
-import {setLocalStorage} from "../components/addLocalStorage"
+import { useState } from "react"
+import { setLocalStorage } from "../components/addLocalStorage"
 
-const PatientTable = ({patientData,setPatientData}) => {
+const PatientTable = ({ patientData, setPatientData }) => {
+
+
+    const [search, setSearch] = useState("")
 
     const onDelete = (indx) => {
-        setPatientData(patientData.filter((item,index)=>index!==indx))   
+        setPatientData(patientData.filter((item, index) => index !== indx))
     }
-    setLocalStorage(patientData)
 
+    const searchPatient = patientData.filter((patient) => {return patient.id.toLowerCase().includes(search.toLowerCase()) || patient.fname.toLowerCase().includes(search.toLowerCase()) || patient.lname.toLowerCase().includes(search.toLowerCase())})
+
+    setLocalStorage(patientData)
 
     return (
         <>
@@ -29,6 +35,7 @@ const PatientTable = ({patientData,setPatientData}) => {
                                 type="text"
                                 placeholder="Search patients by name or ID..."
                                 className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                value={search} onChange={(e) => setSearch(e.target.value)}
                             />
                         </div>
                     </div>
@@ -49,13 +56,13 @@ const PatientTable = ({patientData,setPatientData}) => {
                             </thead>
 
                             <tbody>
-                                    
-                                        
-                            {patientData.map((patient, index) => {
-                                    
+
+
+                                {searchPatient.map((patient, index) => {
+
                                     return (
                                         <tr key={index} className="bg-slate-50 border-b border-slate-200 hover:bg-slate-100 border-y-1 cursor-pointer">
-                                            <td className='px-6 py-4 text-1xl font-semibold text-slate-700 uppercase leading-2 tracking-wider'>{`P${String(index + 1).padStart(3, "0")}`}</td>
+                                            <td className='px-6 py-4 text-1xl font-semibold text-slate-700 uppercase leading-2 tracking-wider'>{patient.id}</td>
                                             <td className='px-6 py-4 text-1xl font-semibold text-slate-700 leading-2'>{patient.fname} {patient.lname}</td>
                                             <td className='px-6 py-4 text-1xl font-semibold text-slate-700 leading-2'>{patient.age} / {patient.gender}</td>
                                             <td className='px-6 py-4 text-1xl font-semibold text-slate-700 leading-2'>{patient.blood}</td>
@@ -65,22 +72,22 @@ const PatientTable = ({patientData,setPatientData}) => {
                                             <td className='px-6 py-4 text-1xl hover:text-red-700 font-semibold text-slate-700 leading-2'><i onClick={(e) => {
                                                 e.preventDefault()
                                                 e.stopPropagation()
-                                                if(confirm(`Would you like to delete this record!`)){
+                                                if (confirm(`Would you like to delete this record!`)) {
                                                     onDelete(index)
                                                 }
                                             }} className="ri-delete-bin-fill"></i></td>
-                                         </tr>
+                                        </tr>
 
-                                     )
-                            })}
+                                    )
+                                })}
 
-                                 {patientData.length == 0 && (
+                                {patientData.length == 0 && (
                                     <tr>
-                                         <td colSpan={10} className='px-6 py-4 text-1xl font-semibold text-slate-700 leading-2'>No Records</td>
-                                     </tr>
-                                 )}
-                             </tbody>
-                            
+                                        <td colSpan={10} className='px-6 py-4 text-1xl font-semibold text-slate-700 leading-2'>No Records</td>
+                                    </tr>
+                                )}
+                            </tbody>
+
                         </table>
                     </div>
                 </div>

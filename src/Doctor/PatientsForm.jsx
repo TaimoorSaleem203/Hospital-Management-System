@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {setLocalStorage} from "../components/addLocalStorage"
 
-
 const PatientsForm = ({patientData,setPatientData}) => {
 
   const [fname, setFName] = useState("");
@@ -13,7 +12,6 @@ const PatientsForm = ({patientData,setPatientData}) => {
   const [contact, setContact] = useState("");
   const [action, setAction] = useState("");
   const [active, setActive] = useState("");
-  
   
   // ❌ Form logic disabled
   // const {
@@ -33,16 +31,27 @@ const PatientsForm = ({patientData,setPatientData}) => {
   // const onSubmit = async (data) => {
   //   await delay(2);
   // };
+
+  const setID = () => {
+    let rawID = JSON.parse(localStorage.getItem("patientData")).at(-1).id
+    let seq = parseInt(rawID.replace("P",""))
+    seq++
+
+    let id = "P"+String(seq).padStart(3,"0")
+    return id
+  } 
+
   const addPatient = () => {
     if(!fname || !lname || !email || !age || !gender || !blood || !contact || !action || !active){
       return
     }
 
-    setPatientData(prev=>[...prev,{"fname":fname,"lname":lname,"email":email,"age":age,"gender":gender,"blood":blood,"contact":contact,"action":action,"active":active}])
+    setPatientData(prev=>[...prev,{"id":setID(),"fname":fname,"lname":lname,"email":email,"age":age,"gender":gender,"blood":blood,"contact":contact,"action":action,"active":active}])
 
-    setFName("") ; setLName("") ; setEmail("") ; setAge("") ; setGender("") ; setBlood("") ; setContact("") ; setAction("") ; setActive("")
-    
+    setFName("") ; setLName("") ; setEmail("") ; setAge("") ; setGender("") ; setBlood("") ; setContact("") ; setAction("") ; setActive("")    
   }
+
+
   setLocalStorage(patientData)
 
   return (

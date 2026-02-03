@@ -9,12 +9,18 @@ const AppointmentsForm = ({appoint,setAppoint}) => {
     const [reason, setReason] = useState("");
     const [action, setAction] = useState("");
     
+    let count = 0
+    const sequenceCounter = () =>{
+        count += 1
+        return `P00${count}`
+    }
+
     const AppointmentAdd = () =>{
         if (!fname || !lname || !date || !time || !reason || !action){
             return
         }
         
-        setAppoint(prev=>[...prev,{"fname":fname,"lname":lname,"date":date,"time":time,"reason":reason,"action":action}])
+        setAppoint(prev=>[...prev,{"ID":sequenceCounter(),"fname":fname,"lname":lname,"date":date,"time":time,"reason":reason,"action":action}])
         setFName("") ; setLName("") ; setDate("") ; setTime("") ; setReason("") ; setAction("")
     }
     setAppointment(appoint)
