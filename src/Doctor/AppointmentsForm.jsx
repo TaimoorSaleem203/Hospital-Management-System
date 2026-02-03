@@ -47,7 +47,7 @@ const AppointmentsForm = ({appoint,setAppoint}) => {
                         />
                     </div>
 
-                    <div>
+                    <div>       
                         <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
                             Last Name
                         </label>

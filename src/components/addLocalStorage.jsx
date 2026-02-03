@@ -6,7 +6,7 @@ export const setLocalStorage = (patientData) =>{
 export const getLocalStorage = () => {
     const rawData = localStorage.getItem("patientData")
     if(!rawData) return []
-    return JSON.parse(rawData)
+    return JSON.parse(rawDasta)
 }
 
 export const setAppointment = (appointData) =>{
