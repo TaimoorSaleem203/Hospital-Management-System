@@ -9,8 +9,13 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
     const [reason, setReason] = useState("");
     const [action, setAction] = useState("");
 
-    const fetchID = () => {
-        return
+    const setID = () => {
+        let rawID = JSON.parse(localStorage.getItem("appointData")).at(-1).id || 101
+        let seq = parseInt(rawID)
+        seq++
+
+        let id = "A"+String(seq)
+        return id
     }
 
     const AppointmentAdd = () => {
@@ -18,7 +23,7 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
             return
         }
 
-        setAppoint(prev => [...prev, { "ID": sequenceCounter(), "fname": fname, "lname": lname, "date": date, "time": time, "reason": reason, "action": action }])
+        setAppoint(prev => [...prev, { "id": setID(), "fname": fname, "lname": lname, "date": date, "time": time, "reason": reason, "action": action }])
         setFName(""); setLName(""); setDate(""); setTime(""); setReason(""); setAction("")
     }
     setAppointment(appoint)
@@ -116,7 +121,7 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
                 <button
                     type="button"
                     className="w-full mt-10 bg-primary-dark hover:bg-primary text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-200"
-                    onClick={() => AppointmentAdd()}
+                    onClick={() => (confirm(`Would you like to confirm the appointment of ${fname} ${lname}?`) && AppointmentAdd())}
                 >
                     Add Appointment
                 </button>
