@@ -30,7 +30,7 @@ const DoctorTable = ({ appoint, setAppoint }) => {
                                 <td className='text-md font-medium text-slate-700 leading-tight'><i className="mr-1 ri-time-line"></i>{patient.time}</td>
                                 <td className='text-md font-medium text-slate-700 leading-tight'>{patient.action}</td>
                                 <td className='text-md font-medium text-primary-dark leading-tight'>Upcoming</td>
-                                {/* {patient.active == "Active" ? <td className='px-6 py-4 text-1xl font-semibold text-green-700 leading-2'>Active</td> : <td className='px-6 py-4 text-1xl font-semibold text-red-700 leading-2'>Block</td>} */}
+                                {/* {patienst.active == "Active" ? <td className='px-6 py-4 text-1xl font-semibold text-green-700 leading-2'>Active</td> : <td className='px-6 py-4 text-1xl font-semibold text-red-700 leading-2'>Block</td>} */}
                                 <td className='text-md hover:text-red-700 font-semibold text-slate-700 leading-2'><i onClick={(e) => {
                                     e.preventDefault()
                                     e.stopPropagation()
@@ -43,11 +43,11 @@ const DoctorTable = ({ appoint, setAppoint }) => {
 
                         })}
 
-                        {/* {patients.length == 0 ?
+                        {appoint.length == 0 &&
                          <tr>
                               <td colSpan={10} className='px-6 py-4 text-1xl font-semibold text-slate-700 leading-2'>No Records</td>
-                        </tr>
-                        } */}
+                        </tr>}
+                        
                     </tbody>
                 </table>
             </div>

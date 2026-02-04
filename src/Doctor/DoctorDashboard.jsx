@@ -32,7 +32,7 @@ const DoctorDashboard = () => {
 
               <div className="flex items-center gap-5">
 
-                <Link to="/doctors/patients/directory">
+                <Link to="/doctor/patients/directory">
                   <button className="mt-8 bg-white text-primary font-semibold px-6 py-2 rounded-lg active:scale-95">
                     View Patients
                   </button>

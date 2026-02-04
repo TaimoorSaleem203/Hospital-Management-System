@@ -10,22 +10,13 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
     const [action, setAction] = useState("");
 
     const setID = () => {
-
-        // let rawID = JSON.parse(localStorage.getItem("appointData")).length!=0 ? JSON.parse(localStorage.getItem("appointData")).at(-1).id.replace("A","") : "100"
-        // let seq = parseInt(rawID)
-        // seq++
-
-        // let id = "A"+String( seq)
         let patients = getLocalStorage()
         
         let matchedPatient = patients.find((patient)=>{
             return fname.charAt(0).toUpperCase() + fname.slice(1).toLowerCase() == patient.fname && lname.charAt(0).toUpperCase() + lname.slice(1).toLowerCase() == patient.lname
         })
 
-        let id = matchedPatient ? matchedPatient.id : null
-
-        return id
-
+        return matchedPatient?.id ?? null
     }
 
     const AppointmentAdd = () => {
@@ -33,7 +24,13 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
             return
         }
 
-        setAppoint(prev => [...prev, { "id": setID(), "fname": fname, "lname": lname, "date": date, "time": time, "reason": reason, "action": action }])
+        let id = setID()
+        if(!id){
+            alert("Patient not found. Please register patient first.")
+            return
+        }
+
+        setAppoint(prev => [...prev, { "id": id, "fname": fname, "lname": lname, "date": date, "time": time, "reason": reason, "action": action }])
         setFName(""); setLName(""); setDate(""); setTime(""); setReason(""); setAction("")
     }
     setAppointment(appoint)

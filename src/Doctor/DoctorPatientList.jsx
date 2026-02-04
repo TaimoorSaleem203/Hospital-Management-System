@@ -8,7 +8,7 @@ const DoctorPatientList = () => {
   const [appoint, setAppoint] = useState(()=>getAppointment())
   
   return (
-        <section className="flex min-h-screen font-poppins bg-[#E5E7EB]">
+      <section className="flex min-h-screen font-poppins bg-[#E5E7EB]">
         <DoctorPanel />
         <main className="flex-1 overflow-y-auto">
           <DoctorHeader />
