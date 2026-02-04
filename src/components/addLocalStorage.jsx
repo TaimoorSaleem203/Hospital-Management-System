@@ -143,3 +143,4 @@ export const getAppointment = () =>{
     if(!rawData) return []
     return JSON.parse(rawData)
 }
+

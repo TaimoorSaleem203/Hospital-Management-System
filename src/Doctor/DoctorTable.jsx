@@ -24,7 +24,7 @@ const DoctorTable = ({ appoint, setAppoint }) => {
 
                             <tr className="border-b text-center border-[#d7d9dd] hover:bg-slate-100 cursor-pointer">
                                 <td className="pt-10"></td>
-                                <td className="font-semibold text-slate-700 leading-tight">1001</td>
+                                <td className="font-semibold text-slate-700 leading-tight">{patient.id}</td>
                                 <td className='font-semibold text-slate-700 leading-tight'>{patient.fname} {patient.lname}</td>
                                 <td className='text-md font-medium text-slate-700 leading-tight'><i className="mr-1 ri-calendar-line"></i>{patient.date}</td>
                                 <td className='text-md font-medium text-slate-700 leading-tight'><i className="mr-1 ri-time-line"></i>{patient.time}</td>

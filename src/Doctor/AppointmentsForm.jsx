@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { setAppointment } from "../components/addLocalStorage";
+import { setAppointment, getLocalStorage } from "../components/addLocalStorage";
 
 const AppointmentsForm = ({ appoint, setAppoint }) => {
     const [fname, setFName] = useState("");
@@ -10,12 +10,22 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
     const [action, setAction] = useState("");
 
     const setID = () => {
-        let rawID = JSON.parse(localStorage.getItem("appointData")).at(-1).id || 101
-        let seq = parseInt(rawID)
-        seq++
 
-        let id = "A"+String(seq)
+        // let rawID = JSON.parse(localStorage.getItem("appointData")).length!=0 ? JSON.parse(localStorage.getItem("appointData")).at(-1).id.replace("A","") : "100"
+        // let seq = parseInt(rawID)
+        // seq++
+
+        // let id = "A"+String( seq)
+        let patients = getLocalStorage()
+        
+        let matchedPatient = patients.find((patient)=>{
+            return fname.charAt(0).toUpperCase() + fname.slice(1).toLowerCase() == patient.fname && lname.charAt(0).toUpperCase() + lname.slice(1).toLowerCase() == patient.lname
+        })
+
+        let id = matchedPatient ? matchedPatient.id : null
+
         return id
+
     }
 
     const AppointmentAdd = () => {
