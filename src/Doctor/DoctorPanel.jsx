@@ -27,7 +27,7 @@ const DoctorPanel = () => {
                                         <>
                                             <span className={`flex items-center gap-3
                                         cursor-pointer text-center transition duration-300 ease-out w-full mx-auto 
-                                        max-w-[350px] rounded-lg p-2 py-3 ${isActive ? "bg-text-heading text-white " : "hover:bg-primary text-[#e9e9e9]"}`}><i className={`text-xl ${items.icon}`}></i> {items.name}
+                                        max-w-[350px] rounded-lg p-2 py-3 ${isActive ? "bg-text-heading text-white " : "hover:bg-primary text-white"}`}><i className={`text-xl ${items.icon}`}></i> {items.name}
                                             </span>
                                         </>
 
