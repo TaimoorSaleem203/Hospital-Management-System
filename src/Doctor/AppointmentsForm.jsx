@@ -8,6 +8,7 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
     const [time, setTime] = useState("");
     const [reason, setReason] = useState("");
     const [action, setAction] = useState("");
+    const [search, setSearch] = useState("")
 
     const setID = () => {
         let patients = getLocalStorage()
@@ -18,6 +19,15 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
 
         return matchedPatient?.id ?? null
     }
+
+    const searchData = (value) => {
+        let patients = getLocalStorage()
+        setSearch(value)
+        
+        
+        
+    }
+    
 
     const AppointmentAdd = () => {
         if (!fname || !lname || !date || !time || !reason || !action) {
@@ -48,7 +58,10 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
             <form className="relative space-y-4 w-full">
                 <div className="border-b border-slate-200 pb-4">
                     <i className="absolute flex items-center top-[9px] left-3 ri-search-line text-slate-500"></i>
-                    <input type="text" placeholder="ID or Patients Name" className="min-w-full w-full pl-10 pr-50 outline-none bg-slate-50 px-4 py-2 border border-slate-200 mx-auto rounded-lg focus:ring-2 focus:ring-blue-500/20" />
+                    <input value={search} onChange={(e)=>searchData(e.target.value)} type="text" placeholder="ID or Patients Name" className="min-w-full w-full pl-10 pr-50 outline-none bg-slate-50 px-4 py-2 border border-slate-200 mx-auto rounded-lg focus:ring-2 focus:ring-blue-500/20" />
+                    <span className="absolute p-5 flex flex-col gap-1 drop-shadow-sm min-w-full min-h-[100px] top-[50px] rounded-sm left-0 -z-1 bg-white">
+                        
+                    </span>    
                 </div>
                 <div className="grid items-center grid-cols-2 gap-4">
                     <div>

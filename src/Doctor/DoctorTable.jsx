@@ -6,6 +6,8 @@ const DoctorTable = ({ appoint, setAppoint }) => {
         setAppoint(appoint.filter((item,index)=>indx!==index))
     }
     setAppointment(appoint)
+
+    
     
     return (
         <>
