@@ -1,10 +1,11 @@
 import { useState } from "react";
-import {setLocalStorage} from "../components/addLocalStorage"
+import { setLocalStorage } from "../components/addLocalStorage"
 
-const PatientsForm = ({patientData,setPatientData}) => {
+const PatientsForm = ({ patientData, setPatientData }) => {
 
   const [fname, setFName] = useState("");
   const [lname, setLName] = useState("");
+  const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
@@ -12,7 +13,8 @@ const PatientsForm = ({patientData,setPatientData}) => {
   const [contact, setContact] = useState("");
   const [action, setAction] = useState("");
   const [active, setActive] = useState("");
-  
+  const [isEye, setEye] = useState(false)
+
   // ❌ Form logic disabled
   // const {
   //   register,
@@ -34,21 +36,21 @@ const PatientsForm = ({patientData,setPatientData}) => {
 
   const setID = () => {
     let rawID = JSON.parse(localStorage.getItem("patientData")).at(-1).id
-    let seq = parseInt(rawID.replace("P",""))
+    let seq = parseInt(rawID.replace("P", ""))
     seq++
 
-    let id = "P"+String(seq).padStart(3,"0")
+    let id = "P" + String(seq).padStart(3, "0")
     return id
-  } 
+  }
 
   const addPatient = () => {
-    if(!fname || !lname || !email || !age || !gender || !blood || !contact || !action || !active){
+    if (!fname || !lname || !email || !age || !gender || !blood || !contact || !action || !active) {
       return
     }
 
-    setPatientData(prev=>[...prev,{"id":setID(),"fname":fname,"lname":lname,"email":email,"age":age,"gender":gender,"blood":blood,"contact":contact,"action":action,"active":active}])
+    setPatientData(prev => [...prev, { "id": setID(), "fname": fname, "lname": lname, "email": email, "age": age, "gender": gender, "blood": blood, "contact": contact, "action": action, "active": active }])
 
-    setFName("") ; setLName("") ; setEmail("") ; setAge("") ; setGender("") ; setBlood("") ; setContact("") ; setAction("") ; setActive("")    
+    setFName(""); setLName(""); setEmail(""); setAge(""); setGender(""); setBlood(""); setContact(""); setAction(""); setActive("")
   }
 
 
@@ -88,17 +90,31 @@ const PatientsForm = ({patientData,setPatientData}) => {
             />
           </div>
         </div>
-            <div>
-              <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
-                Email
-              </label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
-              />
-            </div>
+        <div className="grid grid-cols-2 items-center gap-4">
+          <div>
+            <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
+              Password
+            </label>
+            <input
+              type={`${isEye? "text" : "password"}`}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="relative w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
+            />
+            <i onClick={()=>setEye(!isEye)} class={`${isEye ? "ri-eye-fill" : "ri-eye-line"}  absolute cursor-pointer text-slate-500 active:scale-95 left-[430px] translate-y-2 text-md transition-all duration-300 hover:text-slate-600`}></i>
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
+              Email
+            </label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
+            />
+          </div>
+        </div>
 
 
         <div className="grid grid-cols-3 items-center gap-4">
@@ -151,16 +167,16 @@ const PatientsForm = ({patientData,setPatientData}) => {
           </div>
         </div>
 
-          <div>
-            <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
-              Contact
-            </label>
-            <input
-              value={contact}
-              onChange={(e) => setContact(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
-            />
-          </div>
+        <div>
+          <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
+            Contact
+          </label>
+          <input
+            value={contact}
+            onChange={(e) => setContact(e.target.value)}
+            className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
+          />
+        </div>
         <div className="grid grid-cols-2 gap-5 items-center">
 
           <div className="w-full">
@@ -199,7 +215,7 @@ const PatientsForm = ({patientData,setPatientData}) => {
         <button
           type="button"
           className="w-full mt-10 bg-primary-dark hover:bg-primary text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-200"
-        onClick={()=>(confirm(`Would you like to confirm the registration of ${fname} ${lname}!`) && addPatient())} >
+          onClick={() => (confirm(`Would you like to confirm the registration of ${fname} ${lname}!`) && addPatient())} >
           Add Patient
         </button>
       </form>
