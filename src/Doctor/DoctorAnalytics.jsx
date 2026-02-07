@@ -54,9 +54,10 @@ const DoctorAnalytics = () => {
   }
   const countAppoint = () => {
 
-    let actions = appointments.length
+    let apptLen = appointments.length
+    let patientLen = patients.length
 
-    return [actions,100]
+    return [apptLen,patientLen]
   }
 
   const actionData = {

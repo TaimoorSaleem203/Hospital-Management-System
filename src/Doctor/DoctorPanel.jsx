@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import LogOut from '../components/LogOut'
 
 const DoctorPanel = () => {
 
@@ -43,7 +44,7 @@ const DoctorPanel = () => {
                                             </i>
                                         </span>
 
-                                        <i className={`ri-arrow-down-s-line transition-transform ${OpenDrop == items.name ? "rotate-180" : ""}`}></i>
+                                        <i className={`ri-arrow-down-s-line transition-all duration-150 ease-in-out ${OpenDrop == items.name ? "rotate-180" : ""}`}></i>
                                     </button>
                                 )}
 
@@ -54,7 +55,7 @@ const DoctorPanel = () => {
                                             {({ isActive }) => (
                                                 <>
                                                     <span className={`flex text-base items-center gap-3
-                                        cursor-pointer transition duration-300 ease-out w-full mx-auto 
+                                        cursor-pointer transition-all duration-300 ease-out w-full mx-auto 
                                         rounded-lg p-2 py-3 ${isActive ? "bg-text-heading text-white " : "hover:bg-primary text-[#e9e9e9]"}`}><i className={`text-lg ${child.icon}`}></i> {child.title}
                                                     </span>
                                                 </>
@@ -65,13 +66,13 @@ const DoctorPanel = () => {
                                 </div>
                             )}
 
-
+                            <LogOut />
                         </>
                     )
                 })}
             </div>
 
-            <span className="text-white cursor-pointer flex items-center gap-2 px-10 pt-3 p-2 text-lg absolute bottom-0 right-0 mb-3 border-white/30 border-t w-full mx-auto"><i class="ri-logout-box-r-line"></i>Log Out</span>
+            
         </aside>
     )
 }

@@ -20,6 +20,8 @@ import AdminPatientsDirectory from './Admin/AdminPatientsDirectory.jsx';
 import AdminAppointment from './Admin/AdminAppointment.jsx';
 import AdminAppointmentList from './Admin/AdminAppointmentList.jsx';
 
+import LogOut from './components/LogOut.jsx';
+
 const App = () => {
 
   return (
@@ -52,6 +54,10 @@ const App = () => {
         <Route path='/admin/patients/directory' element={<AdminPatientsDirectory />}></Route>
         <Route path='/admin/appointment/form' element={<AdminAppointment />}></Route>
         <Route path='/admin/appointment/list' element={<AdminAppointmentList />}></Route>
+      </Route>
+
+      <Route>
+        <Route path='/' element={<LogOut />}></Route>
       </Route>
     </Routes>
 
