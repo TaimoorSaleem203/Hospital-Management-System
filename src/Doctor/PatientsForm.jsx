@@ -189,10 +189,11 @@ const PatientsForm = ({ patientData, setPatientData }) => {
               className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
             >
               <option value="">Select</option>
+              <option>Admitted</option>
               <option>Stable</option>
               <option>Recovering</option>
               <option>Critical</option>
-              <option>Emergency</option>
+              <option>Discharged</option>
             </select>
           </div>
 

@@ -14,11 +14,31 @@ const DoctorAnalytics = () => {
   let patients = getLocalStorage()
   let appointments = getAppointment()
 
-  const countActions = () => {
+    const countStatus = () => {
+
+    let actions = patients.map((patient)=>{
+      return patient.active
+    })
+    
+    const countMap = {
+      Active: 0,
+      Inactive: 0
+    }
+
+    for (let i = 0; i < actions.length; i++) {
+      countMap[actions[i]]++
+    }
+
+    return Object.values(countMap)
+  }
+
+  const countAction = () => {
 
     let actions = patients.map((patient)=>{
       return patient.action
     })
+    actions.sort()    
+    
     const countMap = {
       Admitted: 0,
       Recovering: 0,
@@ -32,18 +52,53 @@ const DoctorAnalytics = () => {
 
     return Object.values(countMap)
   }
+  const countAppoint = () => {
 
-  const data = {
+    let actions = appointments.length
+
+    return [actions,100]
+  }
+
+  const actionData = {
     labels: ["Admitted","Recovering", "Critical","Discharged"],
     datasets: [
       {
         label: "Patients",
-        data: countActions(),
+        data: countAction(),
         backgroundColor: [
           "#1F2D3D", // green
           "#0FB9B1", // red
           "#ef4444",
           "#3BAFDA"
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const appointData = {
+    labels: ["No.Of Appointments"],
+    datasets: [
+      {
+        label: "Patients",
+        data: countAppoint(),
+        backgroundColor: [
+          "#3BAFDA",
+          "#E5E7EB" // green
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+  const statusData = {
+    labels: ["Active","Block"],
+    datasets: [
+      {
+        label: "Patients",
+        data: countStatus(),
+        backgroundColor: [
+          "#0FB9B1", // green
+          "#ef4444", // red
         ],
         borderWidth: 1,
       },
@@ -63,9 +118,9 @@ const DoctorAnalytics = () => {
     <div className="bg-white flex items-start flex-col gap-6 shadow-sm rounded-lg p-8 max-w-[1200px] w-full mx-auto">
       <h1 className="text-2xl font-bold text-text-heading">Analytics Overview</h1>
       <div className="flex items-center justify-between max-w-[300px]">
-        <Doughnut data={data} options={options} />
-        <Doughnut data={data} options={options} />
-        <Doughnut data={data} options={options} />
+        <Doughnut data={actionData} options={options} />
+        <Doughnut data={statusData} options={options} />
+        <Doughnut data={appointData} options={options} />
       </div>
     </div>
   );
