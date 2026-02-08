@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { setLocalStorage } from "../components/addLocalStorage"
+import ModalBar from "../components/ModalBar";
 
 const PatientsForm = ({ patientData, setPatientData }) => {
 
@@ -14,6 +15,7 @@ const PatientsForm = ({ patientData, setPatientData }) => {
   const [action, setAction] = useState("");
   const [active, setActive] = useState("");
   const [isEye, setEye] = useState(false)
+  const [modal, setModal] = useState(false)
 
   // ❌ Form logic disabled
   // const {
@@ -44,13 +46,13 @@ const PatientsForm = ({ patientData, setPatientData }) => {
   }
 
   const addPatient = () => {
-    if (!fname || !lname || !email || !age || !gender || !blood || !contact || !action || !active) {
+    if (!fname || !lname || !email || !age || !gender || !blood || !contact || !action || !active || !password) {
       return
     }
 
     setPatientData(prev => [...prev, { "id": setID(), "fname": fname, "lname": lname, "email": email, "age": age, "gender": gender, "blood": blood, "contact": contact, "action": action, "active": active }])
 
-    setFName(""); setLName(""); setEmail(""); setAge(""); setGender(""); setBlood(""); setContact(""); setAction(""); setActive("")
+    setFName(""); setLName(""); setEmail(""); setAge(""); setGender(""); setPassword(""); setBlood(""); setContact(""); setAction(""); setActive("")
   }
 
 
@@ -96,12 +98,12 @@ const PatientsForm = ({ patientData, setPatientData }) => {
               Password
             </label>
             <input
-              type={`${isEye? "text" : "password"}`}
+              type={`${isEye ? "text" : "password"}`}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="relative w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
             />
-            <i onClick={()=>setEye(!isEye)} class={`${isEye ? "ri-eye-fill" : "ri-eye-line"}  absolute cursor-pointer text-slate-500 active:scale-95 left-[430px] translate-y-2 text-md transition-all duration-300 hover:text-slate-600`}></i>
+            <i onClick={() => setEye(!isEye)} className={`${isEye ? "ri-eye-fill" : "ri-eye-line"}  absolute cursor-pointer text-slate-500 active:scale-95 left-[430px] translate-y-2 text-md transition-all duration-300 hover:text-slate-600`}></i>
           </div>
           <div>
             <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
@@ -215,10 +217,25 @@ const PatientsForm = ({ patientData, setPatientData }) => {
 
         <button
           type="button"
-          className="w-full mt-10 bg-primary-dark hover:bg-primary text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-200"
-          onClick={() => (confirm(`Would you like to confirm the registration of ${fname} ${lname}!`) && addPatient())} >
+          className="w-full mt-10 bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-200"
+          onClick={() => setModal(true)}>
           Add Patient
         </button>
+        {modal && (
+          <ModalBar
+            isOpen={modal}
+            isClose={(e) => e.preventDefault()}
+            onConfirm={() => {
+              addPatient()
+              setModal(false)
+            }}
+            title="Registration"
+            description="Confirm the registration of this patient?"
+            icon="ri-add-line"
+
+          />
+        )}
+
       </form>
     </div>
   );
