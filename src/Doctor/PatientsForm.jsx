@@ -47,6 +47,7 @@ const PatientsForm = ({ patientData, setPatientData }) => {
 
   const addPatient = () => {
     if (!fname || !lname || !email || !age || !gender || !blood || !contact || !action || !active || !password) {
+      setModal(false)
       return
     }
 
@@ -93,7 +94,7 @@ const PatientsForm = ({ patientData, setPatientData }) => {
           </div>
         </div>
         <div className="grid grid-cols-2 items-center gap-4">
-          <div>
+          <div className="relative">
             <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
               Password
             </label>
@@ -101,9 +102,9 @@ const PatientsForm = ({ patientData, setPatientData }) => {
               type={`${isEye ? "text" : "password"}`}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="relative w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
+              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
             />
-            <i onClick={() => setEye(!isEye)} className={`${isEye ? "ri-eye-fill" : "ri-eye-line"}  absolute cursor-pointer text-slate-500 active:scale-95 left-[430px] translate-y-2 text-md transition-all duration-300 hover:text-slate-600`}></i>
+            <i onClick={() => setEye(!isEye)} className={`${isEye ? "ri-eye-fill" : "ri-eye-line"}  absolute cursor-pointer text-slate-500 active:scale-95 right-3 translate-y-2 text-md transition-all duration-300 hover:text-slate-600`}></i>
           </div>
           <div>
             <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
@@ -224,11 +225,8 @@ const PatientsForm = ({ patientData, setPatientData }) => {
         {modal && (
           <ModalBar
             isOpen={modal}
-            isClose={(e) => e.preventDefault()}
-            onConfirm={() => {
-              addPatient()
-              setModal(false)
-            }}
+            isClose={() => setModal(false)}
+            onConfirm={() => {addPatient(); setModal(false)}}
             title="Registration"
             description="Confirm the registration of this patient?"
             icon="ri-add-line"

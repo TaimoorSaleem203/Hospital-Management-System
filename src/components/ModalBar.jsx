@@ -11,13 +11,12 @@ const ModalBar = ({
 
   return (
     <div
-      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
-      onClick={onClose}
+      className={`fixed inset-0 bg-black/50 flex items-center justify-center z-50`}
     >
 
       <div
         className="bg-white rounded-lg shadow-xl max-w-lg w-full p-6"
-        onClick={(e) => e.stopPropagation()}
+        onClick={(e)=>e.stopPropagation()}
       >
 
         <div className="flex gap-4 items-start">

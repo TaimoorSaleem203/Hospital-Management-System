@@ -116,12 +116,12 @@ const DoctorAnalytics = () => {
   };
 
   return (
-    <div className="bg-white flex items-start flex-col gap-6 shadow-sm rounded-lg p-8 max-w-[1200px] w-full mx-auto">
+    <div className="bg-white flex flex-col justify-center gap-6 sm:gap-8 shadow-sm rounded-lg p-8 max-w-[1300px] w-full mx-auto">
       <h1 className="text-2xl font-bold text-text-heading">Analytics Overview</h1>
-      <div className="flex items-center justify-between max-w-[300px]">
-        <Doughnut data={actionData} options={options} />
-        <Doughnut data={statusData} options={options} />
-        <Doughnut data={appointData} options={options} />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full mx-auto">
+        <Doughnut data={actionData} options={options} className="max-w-[300px] max-h-[300px]"/>
+        <Doughnut data={statusData} options={options} className="max-w-[300px] max-h-[300px]"/>
+        <Doughnut data={appointData} options={options} className="max-w-[300px] max-h-[300px]"/>
       </div>
     </div>
   );

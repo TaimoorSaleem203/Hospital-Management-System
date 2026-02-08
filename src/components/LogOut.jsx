@@ -33,7 +33,7 @@ const LogOut = () => {
                                 (
                                 <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse gap-2 sm:px-6">
                                     <button onClick={() => setLogout(false)} type="button" command="close" commandfor="dialog" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring inset-ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</button>
-                                    <Link to={"/portal"}>
+                                    <Link to={"/"}>
                                         <button type="button" command="close" commandfor="dialog" class="inline-flex w-full justify-center rounded-md bg-[#0FB9B1] px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-[#009E9A] sm:ml-3 sm:w-auto">Log Out</button>
                                     </Link>
                                 </div>
