@@ -78,7 +78,7 @@ const DoctorAnalytics = () => {
   };
 
   const appointData = {
-    labels: ["No.Of Appointments"],
+    labels: ["Appointments"],
     datasets: [
       {
         label: "Patients",

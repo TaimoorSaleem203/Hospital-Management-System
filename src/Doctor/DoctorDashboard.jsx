@@ -5,18 +5,16 @@ import DoctorAnalytics from "./DoctorAnalytics";
 
 const DoctorDashboard = () => {
  return (
-    <section className="flex min-h-screen font-poppins bg-[#E5E7EB]">
+    <section className="flex relative overflow-hidden h-screen font-poppins bg-[#E5E7EB]">
 
-      {/* Sidebar */}
-      <DoctorPanel />
+      <DoctorPanel className="shrink-0" />
 
-      {/* Main Content */}
-      <main className="flex-1 overflow-y-auto">
+      <main className="relative flex flex-col flex-1 overflow-y-auto">
 
         <DoctorHeader />
 
-        <div className="px-4 sm:px-6 lg:px-10 max-w-[1300px] mx-auto">
-          <div className="flex flex-col gap-10 lg:mb-10 mb-0">
+        <div className="max-w-full w-[1320px] mt-[70px] px-4 sm:px-6 lg:px-12 ml-auto">
+          <div className="flex flex-col justify-center gap-10 lg:mb-10 mb-0">
 
             <div className="mt-8 rounded-lg p-10 min-h-[180px]
               shadow-lg shadow-text-body/30

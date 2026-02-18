@@ -16,7 +16,6 @@ const ModalBar = ({
 
       <div
         className="bg-white rounded-lg shadow-xl max-w-lg w-full p-6"
-        onClick={(e)=>e.stopPropagation()}
       >
 
         <div className="flex gap-4 items-start">

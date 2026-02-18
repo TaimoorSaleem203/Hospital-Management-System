@@ -2,6 +2,7 @@ import { useState } from "react";
 import { setAppointment, getLocalStorage, getAppointment } from "../components/addLocalStorage";
 
 const AppointmentsForm = ({ appoint, setAppoint }) => {
+    
     const [fname, setFName] = useState("");
     const [lname, setLName] = useState("");
     const [date, setDate] = useState("");
