@@ -10,10 +10,10 @@ const NavBar = () => {
 
   return (
     <nav className={`${styles.paddingX} py-8 font-poppins`}>
-      <div className="max-w-7xl w-full mx-auto flex items-center justify-between">
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
         <Link to="/" className="text-[30px] cursor-pointer text-primary-dark font-medium">Medi<span className="font-semibold">Core</span></Link>
 
-        <div className="max-w-7xl mx-auto -translate-x-20">
+        <div className="mx-auto -translate-x-20">
 
           <ul
             className="
@@ -23,8 +23,8 @@ const NavBar = () => {
               shadow-text-body
             "
           >
-            {menuItems. map((item) => (
-              <li key={item.name} className="relative">
+            {menuItems.map((item) => (
+              <li key={item.name}>
                 <NavLink to={item.link} end={item.link === "/"} className="relative transition z-10 px-10 py-2 cursor-pointer">
                   {({ isActive }) => (
                     <>
@@ -36,7 +36,7 @@ const NavBar = () => {
                     ${isActive ? "translate-x-0 opacity-100" : "opacity-0"}`}
                       />
 
-                      <span className={`
+                    <span className={`
                     relative z-10 transition-all duration-150
                       ${isActive ? "text-text-heading font-medium" : "text-text-body"}
                     `}>{item.name}</span>

@@ -226,7 +226,7 @@ const PatientsForm = ({ patientData, setPatientData }) => {
           <ModalBar
             isOpen={modal}
             isClose={() => setModal(false)}
-            onConfirm={() => {addPatient(); setModal(false)}}
+            onConfirm={addPatient}
             title="Registration"
             description="Confirm the registration of this patient?"
             icon="ri-add-line"

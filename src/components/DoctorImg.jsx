@@ -5,9 +5,17 @@ const DoctorImg = () => {
   return (
 
     <>
-      <div className="min-h-screen w-full relative flex items-center justify-center">
-        <img src={maleDoctor} alt="male" className="sm:block hidden max-w-full max-h-full absolute bottom-0 left-[100px]" />
-        <img src={ladyDoctor} alt="lady" className="sm:block hidden max-w-full max-h-full absolute bottom-0 right-[70px]" />
+      <div className="w-full max-w-7xl mx-auto relative flex items-center justify-center">
+        <img
+          src={maleDoctor}
+          alt="maleDoctor"
+          className="hidden sm:block absolute bottom-0 h-full w-full object-contain"
+        />
+        <img
+          src={ladyDoctor}
+          alt="ladyDoctor"
+          className="hidden sm:block absolute bottom-0 w-full h-full object-contain"
+        />
       </div>
     </>
   )

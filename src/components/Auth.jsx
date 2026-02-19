@@ -13,7 +13,7 @@ const Auth = () => {
   return (
     <>
 
-    <div className={`relative font-poppins min-h-screen w-full flex items-center justify-center`}>
+    <div className={`relative font-poppins max-w-7xl mx-auto min-h-screen overflow-hidden h-full flex items-center justify-center`}>
       <DoctorImg />
       <div style={{background:`url(${AuthRect}) center / cover no-repeat`}} className="max-w-[380px] w-full shadow-md bg-cover bg-no-repeat bg-center p-10 rounded-2xl absolute top-0">
         <h1 className="text-primary-dark text-2xl font-semibold">Sign In</h1>

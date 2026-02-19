@@ -6,16 +6,16 @@ import Content from "./Content.jsx"
 const LandPage = () => (
 
   <section
-    className="relative mx-auto w-full font-poppins bg-no-repeat bg-cover bg-center"
+    className="relative overflow-hidden max-w-7xl mx-auto w-full font-poppins bg-no-repeat bg-cover bg-center"
     style={{ backgroundImage: `url(${bg})` }}
   >
-    <div className="relative z-10 flex items-center justify-center">
+    <div className="flex flex-1 items-center justify-center">
 
       {/* Male Doctor */}
       <img
         src={maleDoctor}
         alt="male doctor"
-        className="hidden sm:block absolute bottom-0 left-10 lg:left-24 max-h-[100vh] object-contain"
+        className="hidden sm:block absolute bottom-0 -translate-x-[380px] h-full w-full object-contain"
       />
 
       {/* Center Content */}
@@ -25,7 +25,7 @@ const LandPage = () => (
       <img
         src={ladyDoctor}
         alt="lady doctor"
-        className="hidden sm:block absolute bottom-0 right-10 lg:right-20 max-h-[100vh] object-contain"
+        className="hidden sm:block absolute bottom-0 w-full h-full object-contain translate-x-[380px]"
       />
 
     </div>
