@@ -11,11 +11,11 @@ const PatientPage = () => {
   return (
     <>
 
-      <section className="flex min-h-screen font-poppins bg-[#E5E7EB]">
+      <section className="flex overflow-hidden h-full font-poppins bg-[#E5E7EB]">
         <DoctorPanel />
-        <main className="flex-1 overflow-y-auto">
+        <main className="relative flex-1">
           <DoctorHeader />
-          <div className={`relative flex lg:flex-col max-w-[1080px] sm:max-w-[1330px] justify-center pb-10 gap-5 px-10 mt-10 w-full ml-auto`}>
+          <div className={`flex mt-10 flex-col max-w-[1080px] justify-center pb-2 gap-5 px-10 w-full ml-auto`}>
             <PatientsForm  patientData={patientData} setPatientData={setPatientData}/>
             {/* <PatientTable /> */}
           </div>          
