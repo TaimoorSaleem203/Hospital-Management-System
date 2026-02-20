@@ -7,7 +7,7 @@ const LandPage = () => (
 
   <section
     className="relative overflow-hidden max-w-7xl mx-auto w-full font-poppins bg-no-repeat bg-cover bg-center"
-    style={{ backgroundImage: `url(${bg})` }}
+    style={{ background: `url(${bg})`}}
   >
     <div className="flex flex-1 items-center justify-center">
 

@@ -3,21 +3,19 @@ import maleDoctor from "../assets/maleDoctor.png"
 
 const DoctorImg = () => {
   return (
+    <div className="relative flex items-center w-full h-[500px] md:h-[600px] lg:h-[700px] overflow-hidden">
+      <img
+        src={maleDoctor}
+        alt="Male healthcare professional"
+        className="hidden sm:block w-full h-full object-contain object-bottom transition-opacity duration-500"
+      />
 
-    <>
-      <div className="w-full max-w-7xl mx-auto relative flex items-center justify-center">
-        <img
-          src={maleDoctor}
-          alt="maleDoctor"
-          className="hidden sm:block absolute bottom-0 h-full w-full object-contain"
-        />
-        <img
-          src={ladyDoctor}
-          alt="ladyDoctor"
-          className="hidden sm:block absolute bottom-0 w-full h-full object-contain"
-        />
-      </div>
-    </>
+      <img
+        src={ladyDoctor}
+        alt="Female healthcare professional"
+        className="hidden sm:block absolute inset-0 w-full h-full object-contain object-bottom"
+      />
+    </div>
   )
 }
 

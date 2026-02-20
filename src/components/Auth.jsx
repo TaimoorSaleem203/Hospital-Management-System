@@ -8,7 +8,6 @@ const Auth = () => {
   const roles = ["Doctor", "Patient", "Admin"];
   const [role, setRole] = useState("doctor");
 
- 
 
   return (
     <>
