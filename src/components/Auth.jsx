@@ -8,7 +8,6 @@ const Auth = () => {
   const roles = ["Doctor", "Patient", "Admin"];
   const [role, setRole] = useState("doctor");
 
-
   return (
     <>
 
@@ -30,12 +29,12 @@ const Auth = () => {
         <div className="flex flex-col gap-5 mt-4">
           <div className="flex flex-col gap-2">
             <label className="text-text-heading">Username or Staff ID</label>
-            <input className="p-3 rounded-xl text-text-heading focus:ring-2 focus:ring-primary outline-none" type="text" placeholder="e.g Taimoor1234"/>
+            <input className="p-3 rounded-xl text-text-heading focus:ring-2 focus:ring-primary outline-none" type="text" placeholder="e.g Taimoor1234"  required/>
           </div>
           
           <div className="flex flex-col gap-2">
             <label className="text-text-heading">Password</label>
-            <input className="p-3 rounded-xl text-text-heading focus:ring-2 focus:ring-primary outline-none" type="password" placeholder="••••••••" />
+            <input className="p-3 rounded-xl text-text-heading focus:ring-2 focus:ring-primary outline-none" type="password" placeholder="••••••••" required/>
           </div>
 
           <button onClick={()=> (window.location.href = `${role.toLowerCase()}/dashboard`)}

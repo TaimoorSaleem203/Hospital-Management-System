@@ -5,8 +5,8 @@ const Content = () => {
     return (
         <>
 
-            <div className="relative overflow-hidden max-w-7xl w-full min-h-screen mx-auto">
-                <div className='flex flex-1 flex-col items-center gap-5'>
+            <div className="relative overflow-hidden max-w-7xl w-full h-full mx-auto">
+                <div className='flex flex-col items-center gap-5'>
                     <h1 className="mt-5 leading-[1.1] md:leading-[1.2] text-center font-medium text-4xl md:text-5xl lg:text-6xl text-text-heading">Smart <span className="font-semibold text-primary-dark">HealthCare</span><br />Management</h1>
                     <p className="font-extralight text-text-body sm:text-lg text-md mx-auto w-full max-w-[500px] text-center tracking-wide leading-7">Comprehensive hospital management system for modern healthcare facilities</p>
                     <img src={Button} className="cursor-pointer min-w-[10px] transition-all transform active:scale-95" alt="" />
