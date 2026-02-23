@@ -1,6 +1,4 @@
 import DoctorImg from "./DoctorImg.jsx"
-import ladyDoctor from "../assets/ladyDoctor.png"
-import maleDoctor from "../assets/maleDoctor.png"
 import Content from "./Content.jsx"
 
 const LandPage = () => (
