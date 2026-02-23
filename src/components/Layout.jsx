@@ -6,7 +6,7 @@ import bg from "../assets/bg.png"
 const Layout = () => {
   return (
     <>
-    <section className="relative font-poppins w-full bg-center bg-cover" style={{backgroundImage:`url(${bg})`}}>
+    <section className={`relative overflow-hidden mx-auto w-full h-screen font-poppins bg-no-repeat bg-cover bg-center`} style={{backgroundImage:`url(${bg})`}}>
         <NavBar />
         <Outlet />
     </section>
