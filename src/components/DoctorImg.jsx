@@ -3,7 +3,7 @@ import maleDoctor from "../assets/maleDoctor.png"
 
 const DoctorImg = () => {
   return (
-    <div className="relative flex items-center max-w-7xl mx-auto w-full h-[550px] md:h-[650px] lg:h-[700px] overflow-hidden">
+    <div className="relative flex items-center max-w-7xl mx-auto w-full md:h-[670px] lg:h-[700px] overflow-hidden">
       <img
         src={maleDoctor}
         alt="Male healthcare professional"

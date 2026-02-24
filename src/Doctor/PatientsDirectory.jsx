@@ -13,7 +13,7 @@ const PatientsDirectory = () => {
         <DoctorPanel />
         <main className="flex-1">
           <DoctorHeader />
-          <div className={`flex mt-28 flex-col max-w-[1080px] justify-center pb-10 gap-5 w-full ml-auto`}>
+          <div className={`flex mt-28 flex-col max-w-[1080px] xl:max-w-7xl pb-10 gap-5 w-full ml-auto`}>
             <PatientTable patientData={patientData} setPatientData={setPatientData}/>
           </div>          
         </main>

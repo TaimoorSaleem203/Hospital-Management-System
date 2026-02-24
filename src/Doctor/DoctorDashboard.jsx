@@ -7,13 +7,13 @@ const DoctorDashboard = () => {
  return (
     <section className="flex relative h-full font-poppins bg-[#E5E7EB]">
 
-      <DoctorPanel className="flex-shrink-0" />
+      <DoctorPanel />
 
       <main className="relative flex flex-col flex-1 overflow-y-auto">
 
         <DoctorHeader />
 
-        <div className="max-w-[1080px] w-full mt-[70px] px-4 sm:px-6 lg:px-12 ml-auto">
+        <div className="max-w-[1080px] xl:max-w-7xl w-full mt-[70px] px-6 sm:px-6 lg:px-12 ml-auto">
           <div className="flex flex-col justify-center gap-10 lg:mb-10 mb-0">
 
             <div className="mt-8 rounded-lg p-10 min-h-[180px]

@@ -13,8 +13,8 @@ const DoctorPanel = () => {
     ]
 
     return (
-        <aside className={`fixed inset-0 z-10 max-w-[280px] p-5 font-poppins items-start flex flex-shrink-0 flex-col min-h-screen bg-gradient-to-b to-bg-primary from-[#0FB9B1] to-[#009E9A] w-[300px]`}>
-            <h1 className="border-[#d7d9dd] px-5 text-[30px] cursor-pointer text-white font-normal">Medi<span className="font-semibold">Core</span></h1>
+        <aside className={`fixed inset-0 z-20 max-w-[1080px] xl:max-w-7xl p-5 font-poppins items-start flex flex-col min-h-screen bg-gradient-to-b to-bg-primary from-[#0FB9B1] to-[#009E9A] lg:w-[280px] xl:w-[300px]`}>
+            <h1 className="border-[#d7d9dd] px-3 text-[30px] cursor-pointer text-white font-normal">Medi<span className="font-semibold">Core</span></h1>
             <div className="p-2 mt-10 text-xl w-full mx-auto flex flex-col gap-3">
                 {menuItems.map((items) => {
                     return (

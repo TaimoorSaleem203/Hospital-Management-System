@@ -1,17 +1,18 @@
 import { useState } from "react"
 import { setLocalStorage } from "../components/addLocalStorage"
+import ModalBar from "../components/ModalBar";
 
 const PatientTable = ({ patientData, setPatientData }) => {
 
 
     const [search, setSearch] = useState("")
+    const [modal, setModal] = useState(false)
 
     const onDelete = (indx) => {
         setPatientData(patientData.filter((item, index) => index !== indx))
     }
 
-    const searchPatient = patientData.filter((patient) => {return patient.id.toLowerCase().includes(search.toLowerCase()) || patient.fname.toLowerCase().includes(search.toLowerCase()) || patient.lname.toLowerCase().includes(search.toLowerCase())})
-
+    const searchPatient = patientData.filter((patient) => { return patient.id.toLowerCase().includes(search.toLowerCase()) || patient.fname.toLowerCase().includes(search.toLowerCase()) || patient.lname.toLowerCase().includes(search.toLowerCase()) })
     setLocalStorage(patientData)
 
     return (
@@ -72,10 +73,20 @@ const PatientTable = ({ patientData, setPatientData }) => {
                                             <td className='px-6 py-4 text-1xl hover:text-red-700 font-semibold text-slate-700 leading-2'><i onClick={(e) => {
                                                 e.preventDefault()
                                                 e.stopPropagation()
-                                                if (confirm(`Would you like to delete this record!`)) {
-                                                    onDelete(index)
-                                                }
+                                                setModal(true)
                                             }} className="ri-delete-bin-fill"></i></td>
+                                            {
+                                                modal && (
+                                                    <ModalBar
+                                                        isOpen={modal}
+                                                        onClose={() => setModal(false)}
+                                                        onConfirm={() => { onDelete(index); setModal(true) }}
+                                                        title="Delete"
+                                                        description="Would you like to delete this record?"
+                                                        icon="ri-delete-bin-line text-red-700"
+                                                    />
+                                                )
+                                            }
                                         </tr>
 
                                     )

@@ -13,7 +13,7 @@ const DoctorPatientList = () => {
         <DoctorPanel />
         <main className="relative flex-1">
           <DoctorHeader />
-          <div className={`flex px-12 mt-28 flex-col max-w-[1080px] justify-center pb-8 gap-5 w-full ml-auto`}>
+          <div className={`flex px-12 mt-28 flex-col max-w-[1080px] xl:max-w-7xl justify-center pb-8 gap-5 w-full ml-auto`}>
             <DoctorTable appoint={appoint} setAppoint={setAppoint} />
           </div>
         </main>

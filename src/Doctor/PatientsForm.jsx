@@ -54,13 +54,14 @@ const PatientsForm = ({ patientData, setPatientData }) => {
     setPatientData(prev => [...prev, { "id": setID(), "fname": fname, "lname": lname, "email": email, "age": age, "gender": gender, "blood": blood, "contact": contact, "action": action, "active": active }])
 
     setFName(""); setLName(""); setEmail(""); setAge(""); setGender(""); setPassword(""); setBlood(""); setContact(""); setAction(""); setActive("")
+    setModal(false)
   }
 
 
   setLocalStorage(patientData)
 
   return (
-    <div className="mb-10 mt-[70px] w-full p-8 h-full flex bg-white border shadow-sm rounded-2xl flex-col gap-5">
+    <div className="mb-10 relative mt-[70px] p-8 w-full h-full flex bg-white border shadow-sm rounded-2xl flex-col gap-5">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-xl font-semibold text-text-heading">Registration</h2>
         <span className="bg-blue-50 text-primary px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
@@ -68,7 +69,7 @@ const PatientsForm = ({ patientData, setPatientData }) => {
         </span>
       </div>
 
-      <form className="space-y-4 relative">
+      <form className="space-y-4">
         <div className="grid items-center grid-cols-2 gap-4">
           <div>
             <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
@@ -225,12 +226,11 @@ const PatientsForm = ({ patientData, setPatientData }) => {
         {modal && (
           <ModalBar
             isOpen={modal}
-            isClose={() => setModal(false)}
+            onClose={()=>setModal(false)}
             onConfirm={addPatient}
             title="Registration"
             description="Confirm the registration of this patient?"
             icon="ri-add-line"
-
           />
         )}
 

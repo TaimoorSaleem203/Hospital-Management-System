@@ -1,3 +1,4 @@
+
 const ModalBar = ({
   isOpen,
   onClose,
@@ -6,37 +7,39 @@ const ModalBar = ({
   description,
   icon
 }) => {
-
+ 
   if (!isOpen) return null
 
   return (
     <div
-      className={`fixed inset-0 bg-black/35 flex items-center justify-center z-50`}
+      className={`fixed inset-0 bg-black/35 flex items-center justify-center z-20`}
     >
 
       <div
-        className="bg-white rounded-lg shadow-xl max-w-lg w-full p-6"
+        className="bg-white mx-auto rounded-lg shadow-xl max-w-lg w-full p-6"
       >
 
         <div className="flex gap-4 items-start">
-          <div className="rounded-full bg-gray-200 p-3">
+          <div className="rounded-full bg-gray-200 px-3 py-2">
             <i className={icon}></i>
           </div>
 
-          <div>
-            <h3 className="font-semibold">{title}</h3>
+          <div className="flex items-start flex-col gap-1">
+            <h3 className="font-medium text-lg">{title}</h3>
             <p className="text-gray-500">{description}</p>
           </div>
         </div>
 
         <div className="flex justify-end gap-2 mt-6">
           <button
+            type="button"
             onClick={onConfirm}
-            className="px-4 py-2 bg-teal-500 text-white rounded"
+            className="px-4 py-2 bg-teal-500 hover:bg-teal-600 text-white rounded"
           >
             Confirm
           </button>
           <button
+            type="button"
             onClick={onClose}
             className="px-4 py-2 border rounded"
           >
