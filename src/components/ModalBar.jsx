@@ -12,7 +12,7 @@ const ModalBar = ({
 
   return (
     <div
-      className={`fixed inset-0 bg-black/35 flex items-center justify-center z-20`}
+      className={`fixed inset-0 font-medium text-black bg-black/35 flex items-center justify-center z-20`}
     >
 
       <div
@@ -24,7 +24,7 @@ const ModalBar = ({
             <i className={icon}></i>
           </div>
 
-          <div className="flex items-start flex-col gap-1">
+          <div className="w-full flex flex-col text-start gap-1">
             <h3 className="font-medium text-lg">{title}</h3>
             <p className="text-gray-500">{description}</p>
           </div>

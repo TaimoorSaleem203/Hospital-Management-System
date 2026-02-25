@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { setAppointment, getLocalStorage, getAppointment } from "../components/addLocalStorage";
+import ModalBar from "../components/ModalBar";
 
 const AppointmentsForm = ({ appoint, setAppoint }) => {
-    
+
     const [fname, setFName] = useState("");
     const [lname, setLName] = useState("");
     const [date, setDate] = useState("");
@@ -12,6 +13,7 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
     const [search, setSearch] = useState("")
     const [result, setResult] = useState([])
     const [disabled, setDisabled] = useState(false)
+    const [modal, setModal] = useState(false)
 
     const setID = () => {
         let patients = getLocalStorage()
@@ -50,10 +52,10 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
         let appointments = getAppointment()
 
         let id = setID()
-        let allID = appointments.map((item)=>{return item.id})
+        let allID = appointments.map((item) => { return item.id })
 
-        for(let i=0 ; i<allID.length ; i++){
-            if(id == allID[i]){
+        for (let i = 0; i < allID.length; i++) {
+            if (id == allID[i]) {
                 alert("Patient's Appointment already registered. One appointment at a time!")
                 return
             }
@@ -66,6 +68,7 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
 
         setAppoint(prev => [...prev, { "id": id, "fname": fname, "lname": lname, "date": date, "time": time, "reason": reason, "action": action }])
         setFName(""); setLName(""); setDate(""); setTime(""); setReason(""); setAction("")
+        setModal(false)
     }
     setAppointment(appoint)
 
@@ -118,7 +121,7 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-2 items-center">
+                <div className="grid grid-cols-2 gap-4 items-center">
                     <div>
                         <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
                             Appointment Date
@@ -169,11 +172,20 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
                 </div>
 
                 <button
-                    type="button"
                     className="w-full mt-10 bg-primary-dark hover:bg-primary text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-200"
-                    onClick={() => (confirm(`Would you like to confirm the appointment of ${fname} ${lname}?`) && AppointmentAdd())}
+                    onClick={() => setModal(true)}
                 >
                     Add Appointment
+                    {modal && (
+                        <ModalBar
+                            isOpen={modal}
+                            onClose={() => setModal(false)}
+                            onConfirm={AppointmentAdd}
+                            title="Appointment Reservation"
+                            description="Confirm the registration of patient's appointment?"
+                            icon="ri-add-line"
+                        />
+                    )}
                 </button>
             </form>
         </div>

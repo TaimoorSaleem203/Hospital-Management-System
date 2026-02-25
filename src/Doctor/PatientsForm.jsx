@@ -17,25 +17,6 @@ const PatientsForm = ({ patientData, setPatientData }) => {
   const [isEye, setEye] = useState(false)
   const [modal, setModal] = useState(false)
 
-  // ❌ Form logic disabled
-  // const {
-  //   register,
-  //   setError,
-  //   watch,
-  //   formState: { errors, isSubmitting }
-  // } = useForm();
-
-  // ❌ Async logic disabled
-  // const delay = (d) => {
-  //   return new Promise((res) => {
-  //     setTimeout(() => res(), d * 1000);
-  //   });
-  // };
-
-  // const onSubmit = async (data) => {
-  //   await delay(2);
-  // };
-
   const setID = () => {
     let rawID = JSON.parse(localStorage.getItem("patientData")).at(-1).id
     let seq = parseInt(rawID.replace("P", ""))
@@ -226,7 +207,7 @@ const PatientsForm = ({ patientData, setPatientData }) => {
         {modal && (
           <ModalBar
             isOpen={modal}
-            onClose={()=>setModal(false)}
+            onClose={() => setModal(false)}
             onConfirm={addPatient}
             title="Registration"
             description="Confirm the registration of this patient?"

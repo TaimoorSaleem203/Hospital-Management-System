@@ -41,7 +41,7 @@ const PatientTable = ({ patientData, setPatientData }) => {
                         </div>
                     </div>
 
-                    <div className="overflow-x-auto">
+                    <div className="overflow-x-auto relative">
                         <table className="w-full text-center">
                             <thead>
                                 <tr className="bg-slate-50 border-b border-slate-200 border-y-2">
@@ -83,7 +83,7 @@ const PatientTable = ({ patientData, setPatientData }) => {
                                                         onConfirm={() => { onDelete(index); setModal(true) }}
                                                         title="Delete"
                                                         description="Would you like to delete this record?"
-                                                        icon="ri-delete-bin-line text-red-700"
+                                                        icon="ri-delete-bin-line"
                                                     />
                                                 )
                                             }
