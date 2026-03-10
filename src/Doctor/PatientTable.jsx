@@ -17,7 +17,7 @@ const PatientTable = ({ patientData, setPatientData }) => {
 
     return (
         <>
-            <div className={`w-full flex flex-col gap-5 px-4 sm:px-6 lg:px-12`}>
+            <div className={`w-full overflow-hidden flex flex-col gap-5 px-4 sm:px-6 lg:px-12`}>
                 <header className="flex justify-between items-center">
                     <div>
                         <h2 className="text-2xl font-semibold text-text-heading">Patient Directory</h2>

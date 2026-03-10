@@ -6,7 +6,7 @@ const PatientsForm = ({ patientData, setPatientData }) => {
 
   const [fname, setFName] = useState("");
   const [lname, setLName] = useState("");
-  const [password, setPassword] = useState("");
+  const [dob, setDOB] = useState("");
   const [email, setEmail] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
@@ -14,7 +14,6 @@ const PatientsForm = ({ patientData, setPatientData }) => {
   const [contact, setContact] = useState("");
   const [action, setAction] = useState("");
   const [active, setActive] = useState("");
-  const [isEye, setEye] = useState(false)
   const [modal, setModal] = useState(false)
 
   const setID = () => {
@@ -26,8 +25,22 @@ const PatientsForm = ({ patientData, setPatientData }) => {
     return id
   }
 
+  const getAge = () =>{
+    let today = new Date()
+    let DOB = dob.split("-").join("")
+
+    let year = Number(DOB.slice(0,4)) ; let month = Number(DOB.slice(4,6)) ; let day = Number(DOB.slice(6,8))
+    let age = today.getFullYear() - year
+    
+    if(today.getMonth()<month || (today.getDay()<day && today.getMonth()===month)){
+      age--
+    }
+    
+    return age
+  }
+
   const addPatient = () => {
-    if (!fname || !lname || !email || !age || !gender || !blood || !contact || !action || !active || !password) {
+    if (!fname || !lname || !email || !age || !gender || !blood || !contact || !action || !active) {
       setModal(false)
       return
     }
@@ -76,18 +89,7 @@ const PatientsForm = ({ patientData, setPatientData }) => {
           </div>
         </div>
         <div className="grid grid-cols-2 items-center gap-4">
-          <div className="relative">
-            <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
-              Password
-            </label>
-            <input
-              type={`${isEye ? "text" : "password"}`}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
-            />
-            <i onClick={() => setEye(!isEye)} className={`${isEye ? "ri-eye-fill" : "ri-eye-line"}  absolute cursor-pointer text-slate-500 active:scale-95 right-3 translate-y-2 text-md transition-all duration-300 hover:text-slate-600`}></i>
-          </div>
+
           <div>
             <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
               Email
@@ -99,19 +101,28 @@ const PatientsForm = ({ patientData, setPatientData }) => {
               className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
             />
           </div>
+          <div>
+            <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
+              DOB
+            </label>
+            <input
+              type="date"
+              value={dob}
+              onChange={(e) => setDOB(e.target.value)}
+              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
+            />
+          </div>
         </div>
-
-
         <div className="grid grid-cols-3 items-center gap-4">
           <div>
             <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
               Age
             </label>
             <input
-              value={age}
-              onChange={(e) => setAge(e.target.value)}
+              value={getAge}
+              onChange={(e)=>setAge(e.target.value)}
               className="w-full bg-slate-50 border border-slate-200 rounded-lg px-5 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
-            />
+              />
           </div>
 
           <div>

@@ -5,22 +5,22 @@ import { getLocalStorage } from "../components/addLocalStorage"
 import { useState } from "react"
 
 const PatientsDirectory = () => {
-    const [patientData, setPatientData] = useState(()=>getLocalStorage())
+  const [patientData, setPatientData] = useState(() => getLocalStorage())
 
-    return (
-        <>
+  return (
+    <>
       <section className="flex overflow-hidden min-h-screen h-full font-poppins bg-[#E5E7EB]">
         <DoctorPanel />
         <main className="flex-1">
           <DoctorHeader />
-          <div className={`flex mt-28 flex-col max-w-[1080px] xl:max-w-7xl pb-10 gap-5 w-full ml-auto`}>
-            <PatientTable patientData={patientData} setPatientData={setPatientData}/>
-          </div>          
+          <div className="w-full max-w-[1080px] xl:max-w-7xl ml-auto mt-28 pb-10 gap-5">
+            <PatientTable patientData={patientData} setPatientData={setPatientData} />
+          </div>
         </main>
       </section>
 
-        </>
-    )
+    </>
+  )
 }
 
 export default PatientsDirectory
