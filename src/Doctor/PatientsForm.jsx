@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useEffect, useState } from "react";
 import { setLocalStorage } from "../components/addLocalStorage"
 import ModalBar from "../components/ModalBar";
 
@@ -15,6 +15,10 @@ const PatientsForm = ({ patientData, setPatientData }) => {
   const [action, setAction] = useState("");
   const [active, setActive] = useState("");
   const [modal, setModal] = useState(false)
+
+  useEffect(()=>{ // run logic after components update 
+    if(dob) getAge()
+  },[dob])
 
   const setID = () => {
     let rawID = JSON.parse(localStorage.getItem("patientData")).at(-1).id
@@ -36,11 +40,11 @@ const PatientsForm = ({ patientData, setPatientData }) => {
       age--
     }
     
-    return age
+    setAge(age)
   }
 
   const addPatient = () => {
-    if (!fname || !lname || !email || !age || !gender || !blood || !contact || !action || !active) {
+    if (!fname || !lname || !email || !age || !gender || !blood || !contact || !action || !active || !dob) {
       setModal(false)
       return
     }
@@ -119,7 +123,8 @@ const PatientsForm = ({ patientData, setPatientData }) => {
               Age
             </label>
             <input
-              value={getAge}
+              value={age}
+              readOnly
               onChange={(e)=>setAge(e.target.value)}
               className="w-full bg-slate-50 border border-slate-200 rounded-lg px-5 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
               />
@@ -163,6 +168,8 @@ const PatientsForm = ({ patientData, setPatientData }) => {
           </div>
         </div>
 
+        <div className="grid grid-cols-3 gap-5 items-center">
+
         <div>
           <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
             Contact
@@ -173,8 +180,6 @@ const PatientsForm = ({ patientData, setPatientData }) => {
             className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
           />
         </div>
-        <div className="grid grid-cols-2 gap-5 items-center">
-
           <div className="w-full">
             <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
               Action
