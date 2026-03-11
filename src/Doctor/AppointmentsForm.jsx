@@ -29,7 +29,7 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
         let patients = getLocalStorage()
         let searchValue = value.toLowerCase()
 
-        setSearch(value)
+        setSearch(searchValue)
 
         let result = patients.filter((patient) =>
             patient.fname.toLowerCase().includes(searchValue) ||
@@ -49,15 +49,11 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
         setResult([])
     }
 
-
-    const AppointmentAdd = (e) => {
-        e.preventDefault()
-
-        if (!fname || !lname || date=="mm/dd/yyyy" || time=="--:-- --" || !reason || !action) {
+    const validateForm = () => {
+        if (!fname || !lname || date == "mm/dd/yyyy" || time == "--:-- --" || !reason || !action) {
             alert("Please fill all required fields")
             return
         }
-
         let id = setID();
 
         let appointments = getAppointment();
@@ -74,10 +70,17 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
             alert("Patient not found. Please register patient first.")
             return
         }
+        setModal(true)
+    }
+
+    const AppointmentAdd = (e) => {
+        e.preventDefault()
+
+        let id = setID();
 
         setAppoint(prev => [...prev, { "id": id, "fname": fname, "lname": lname, "date": date, "time": time, "reason": reason, "action": action }])
         setFName(""); setLName(""); setDate(""); setTime(""); setReason(""); setAction("")
-        setModal(!modal)
+        setModal(false)
     }
     setAppointment(appoint)
 
@@ -98,7 +101,7 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
                     <span className={`${search.length == 0 && "hidden"} transition-all delay-150 duration-300 ease-in-out absolute p-3 flex flex-col gap-2 shadow-md min-w-full overflow-y-auto max-h-[300px] top-[50px] rounded-sm left-0 -z-1 bg-white`}>
                         {search.length > 0 && result.map((item) => {
                             return (
-                                <p onClick={() => { fetchData(item)}} className="w-full transition-all duration-150 p-3 rounded-lg cursor-pointer hover:bg-slate-100">{item.id}: {item.fname} {item.lname}</p>
+                                <p onClick={() => { fetchData(item) }} className="w-full transition-all duration-150 p-3 rounded-lg cursor-pointer hover:bg-slate-100">{item.id}: {item.fname} {item.lname}</p>
                             )
                         })}
                     </span>
@@ -183,7 +186,7 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
                 <button
                     type="button"
                     className="w-full mt-2 bg-primary-dark hover:bg-primary text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-200"
-                    onClick={() => setModal(true)}
+                    onClick={() => validateForm()}
                 >
                     Add Appointment
                 </button>
