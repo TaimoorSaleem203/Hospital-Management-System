@@ -10,10 +10,13 @@ const PatientTable = ({ patientData, setPatientData }) => {
 
     const onDelete = (indx) => {
         setPatientData(patientData.filter((item, index) => index !== indx))
+        setModal(!modal);
     }
 
     const searchPatient = patientData.filter((patient) => { return patient.id.toLowerCase().includes(search.toLowerCase()) || patient.fname.toLowerCase().includes(search.toLowerCase()) || patient.lname.toLowerCase().includes(search.toLowerCase()) })
     setLocalStorage(patientData)
+
+    let indx;
 
     return (
         <>
@@ -28,7 +31,7 @@ const PatientTable = ({ patientData, setPatientData }) => {
 
                 </header>
 
-                <div className="bg-white rounded-xl border border-slate-200 shadow-sm">
+                <div className="bg-white rounded-xl border-2 border-slate-200 shadow-sm">
                     <div className="p-4 border-b border-slate-100">
                         <div className="relative max-w-md">
                             <span className="cursor-pointer absolute inset-y-0 left-3 flex items-center text-slate-400"><i className="ri-search-line text-xl"></i></span>
@@ -60,38 +63,40 @@ const PatientTable = ({ patientData, setPatientData }) => {
 
 
                                 {searchPatient.map((patient, index) => {
-
+                                    indx = index
                                     return (
                                         <tr key={index} className="bg-slate-50 border-b border-slate-200 hover:bg-slate-100 border-y-1 cursor-pointer">
-                                            <td className='px-6 py-4 text-1xl font-semibold text-slate-700 uppercase leading-2 tracking-wider'>{patient.id}</td>
-                                            <td className='px-6 py-4 text-1xl font-semibold text-slate-700 leading-2'>{patient.fname} {patient.lname}</td>
-                                            <td className='px-6 py-4 text-1xl font-semibold text-slate-700 leading-2'>{patient.age} / {patient.gender}</td>
-                                            <td className='px-6 py-4 text-1xl font-semibold text-slate-700 leading-2'>{patient.blood}</td>
-                                            <td className='px-6 py-4 text-1xl font-semibold text-slate-700 leading-2'>{patient.contact}</td>
-                                            <td className='px-6 py-4 text-1xl font-semibold text-slate-700 leading-2'>{patient.action}</td>
+                                            <td className='px-6 py-4 font-semibold text-slate-700 uppercase leading-2 tracking-wider'>{patient.id}</td>
+                                            <td className='px-6 py-4 font-semibold text-slate-700 leading-2'>{patient.fname} {patient.lname}</td>
+                                            <td className='px-6 py-4 font-semibold text-slate-700 leading-2'>{patient.age} / {patient.gender}</td>
+                                            <td className='px-6 py-4 font-semibold text-slate-700 leading-2'>{patient.blood}</td>
+                                            <td className='px-6 py-4 font-semibold text-slate-700 leading-2'>{patient.contact}</td>
+                                            <td className='px-6 py-4 font-semibold text-slate-700 leading-2'>{patient.action}</td>
                                             {patient.active == "Active" ? <td className='px-6 py-4 text-1xl font-semibold text-green-700 leading-2'>Active</td> : <td className='px-6 py-4 text-1xl font-semibold text-red-700 leading-2'>Block</td>}
-                                            <td className='px-6 py-4 text-1xl hover:text-red-700 font-semibold text-slate-700 leading-2'><i onClick={(e) => {
+                                            <td className='px-6 py-4 hover:text-red-700 font-semibold text-slate-700 leading-2'><i onClick={(e) => {
                                                 e.preventDefault()
                                                 e.stopPropagation()
                                                 setModal(true)
                                             }} className="ri-delete-bin-fill"></i></td>
-                                            {
-                                                modal && (
-                                                    <ModalBar
-                                                        isOpen={modal}
-                                                        onClose={() => setModal(false)}
-                                                        onConfirm={() => { onDelete(index); setModal(true) }}
-                                                        title="Delete"
-                                                        description="Would you like to delete this record?"
-                                                        icon="ri-delete-bin-line"
-                                                    />
-                                                )
-                                            }
                                         </tr>
 
                                     )
                                 })}
 
+                                {
+                                    modal && (
+                                        <ModalBar
+                                            isOpen={modal}
+                                            onClose={() => setModal(false)}
+                                            onConfirm={() => { 
+                                                onDelete(indx);  
+                                            }}
+                                            title="Delete"
+                                            description="Would you like to delete this record?"
+                                            icon="ri-delete-bin-line"
+                                        />
+                                    )
+                                }
                                 {patientData.length == 0 && (
                                     <tr>
                                         <td colSpan={10} className='px-6 py-4 text-1xl font-semibold text-slate-700 leading-2'>No Records</td>

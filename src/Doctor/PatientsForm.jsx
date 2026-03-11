@@ -59,7 +59,7 @@ const PatientsForm = ({ patientData, setPatientData }) => {
   setLocalStorage(patientData)
 
   return (
-    <div className="mb-10 relative mt-[70px] p-8 w-full h-full flex bg-white border shadow-sm rounded-2xl flex-col gap-5">
+    <div className="mb-10 mt-[70px] p-8 w-full h-full flex bg-white border shadow-sm rounded-2xl flex-col gap-5">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-xl font-semibold text-text-heading">Registration</h2>
         <span className="bg-blue-50 text-primary px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
@@ -67,7 +67,7 @@ const PatientsForm = ({ patientData, setPatientData }) => {
         </span>
       </div>
 
-      <form className="space-y-4">
+      <form className="flex flex-col gap-3">
         <div className="grid items-center grid-cols-2 gap-4">
           <div>
             <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
@@ -78,6 +78,7 @@ const PatientsForm = ({ patientData, setPatientData }) => {
               value={fname}
               onChange={(e) => setFName(e.target.value)}
               className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
+              required
             />
           </div>
 
@@ -89,6 +90,7 @@ const PatientsForm = ({ patientData, setPatientData }) => {
               value={lname}
               onChange={(e) => setLName(e.target.value)}
               className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
+              required
             />
           </div>
         </div>
@@ -103,6 +105,7 @@ const PatientsForm = ({ patientData, setPatientData }) => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
+              required
             />
           </div>
           <div>
@@ -114,6 +117,7 @@ const PatientsForm = ({ patientData, setPatientData }) => {
               value={dob}
               onChange={(e) => setDOB(e.target.value)}
               className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
+              required
             />
           </div>
         </div>
@@ -127,6 +131,7 @@ const PatientsForm = ({ patientData, setPatientData }) => {
               readOnly
               onChange={(e)=>setAge(e.target.value)}
               className="w-full bg-slate-50 border border-slate-200 rounded-lg px-5 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
+              required
               />
           </div>
 
@@ -216,7 +221,7 @@ const PatientsForm = ({ patientData, setPatientData }) => {
 
         <button
           type="button"
-          className="w-full mt-10 bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-200"
+          className="w-full mt-5 bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-200"
           onClick={() => setModal(true)}>
           Add Patient
         </button>

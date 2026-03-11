@@ -22,37 +22,46 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
             return fname.charAt(0).toUpperCase() + fname.slice(1).toLowerCase() == patient.fname && lname.charAt(0).toUpperCase() + lname.slice(1).toLowerCase() == patient.lname
         })
 
-        return matchedPatient?.id ?? null
+        return matchedPatient.id
     }
 
     const searchData = (value) => {
         let patients = getLocalStorage()
+        let searchValue = value.toLowerCase()
+
         setSearch(value)
-        let result = patients.filter((patient) => patient.fname.toLowerCase().includes(value) || patient.lname.toLowerCase().includes(value) || patient.id.toLowerCase().includes(value))
+
+        let result = patients.filter((patient) =>
+            patient.fname.toLowerCase().includes(searchValue) ||
+            patient.lname.toLowerCase().includes(searchValue) ||
+            patient.id.toLowerCase().includes(searchValue)
+        )
 
         setResult(result)
     }
 
-    const fetchData = () => {
-        result.map((patient) => {
-            setFName(patient.fname)
-            setLName(patient.lname)
-        })
+    const fetchData = (patient) => {
+        setFName(patient.fname)
+        setLName(patient.lname)
 
         setDisabled(true)
         setSearch("")
+        setResult([])
     }
 
 
-    const AppointmentAdd = () => {
+    const AppointmentAdd = (e) => {
+        e.preventDefault()
 
-        if (!fname || !lname || !date || !time || !reason || !action) {
+        if (!fname || !lname || date=="mm/dd/yyyy" || time=="--:-- --" || !reason || !action) {
+            alert("Please fill all required fields")
             return
         }
-        let appointments = getAppointment()
 
-        let id = setID()
-        let allID = appointments.map((item) => { return item.id })
+        let id = setID();
+
+        let appointments = getAppointment();
+        let allID = appointments.map((item) => { return item.id });
 
         for (let i = 0; i < allID.length; i++) {
             if (id == allID[i]) {
@@ -68,7 +77,7 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
 
         setAppoint(prev => [...prev, { "id": id, "fname": fname, "lname": lname, "date": date, "time": time, "reason": reason, "action": action }])
         setFName(""); setLName(""); setDate(""); setTime(""); setReason(""); setAction("")
-        setModal(false)
+        setModal(!modal)
     }
     setAppointment(appoint)
 
@@ -82,14 +91,14 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
                 </span>
             </div>
 
-            <form className="relative space-y-4 w-full">
+            <form className="relative flex flex-col gap-4 w-full">
                 <div className="border-b border-slate-200 pb-4">
                     <i className="absolute flex items-center top-[9px] left-3 ri-search-line text-slate-500"></i>
                     <input value={search} onChange={(e) => searchData(e.target.value)} type="text" placeholder="ID or Patients Name" className="min-w-full w-full pl-10 pr-50 outline-none bg-slate-50 px-4 py-2 border border-slate-200 mx-auto rounded-lg focus:ring-2 focus:ring-blue-500/20" />
                     <span className={`${search.length == 0 && "hidden"} transition-all delay-150 duration-300 ease-in-out absolute p-3 flex flex-col gap-2 shadow-md min-w-full overflow-y-auto max-h-[300px] top-[50px] rounded-sm left-0 -z-1 bg-white`}>
                         {search.length > 0 && result.map((item) => {
                             return (
-                                <p onClick={() => { fetchData() }} className="w-full transition-all duration-150 p-3 rounded-lg cursor-pointer hover:bg-slate-100">{item.id}: {item.fname} {item.lname}</p>
+                                <p onClick={() => { fetchData(item)}} className="w-full transition-all duration-150 p-3 rounded-lg cursor-pointer hover:bg-slate-100">{item.id}: {item.fname} {item.lname}</p>
                             )
                         })}
                     </span>
@@ -172,21 +181,22 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
                 </div>
 
                 <button
-                    className="w-full mt-10 bg-primary-dark hover:bg-primary text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-200"
+                    type="button"
+                    className="w-full mt-2 bg-primary-dark hover:bg-primary text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-200"
                     onClick={() => setModal(true)}
                 >
                     Add Appointment
-                    {modal && (
-                        <ModalBar
-                            isOpen={modal}
-                            onClose={() => setModal(false)}
-                            onConfirm={AppointmentAdd}
-                            title="Appointment Reservation"
-                            description="Confirm the registration of patient's appointment?"
-                            icon="ri-add-line"
-                        />
-                    )}
                 </button>
+                {modal && (
+                    <ModalBar
+                        isOpen={modal}
+                        onClose={() => setModal(false)}
+                        onConfirm={AppointmentAdd}
+                        title="Appointment Reservation"
+                        description="Confirm the registration of patient's appointment?"
+                        icon="ri-heart-add-2-line"
+                    />
+                )}
             </form>
         </div>
     );

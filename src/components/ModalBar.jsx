@@ -12,7 +12,7 @@ const ModalBar = ({
 
   return (
     <div
-      className={`fixed inset-0 font-medium text-black bg-black/35 flex items-center justify-center z-20`}
+      className={`fixed inset-0 font-medium text-black bg-black/30 flex items-center justify-center z-20`}
     >
 
       <div
