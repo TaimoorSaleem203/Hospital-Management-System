@@ -211,7 +211,7 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
                 >
                     Add Appointment
                 </button>
-                {modal && (
+                {modal.open && (
                     <ModalBar
                         isOpen={modal.open}
                         onClose={() => setModal((prev) => ({ ...prev, open: false }))}

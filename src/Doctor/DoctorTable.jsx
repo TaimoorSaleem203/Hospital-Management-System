@@ -52,7 +52,6 @@ const DoctorTable = ({ appoint, setAppoint }) => {
                                             icon="ri-delete-bin-line"
                                         />
                                     )}
-
                                 </tr>
                             )
 

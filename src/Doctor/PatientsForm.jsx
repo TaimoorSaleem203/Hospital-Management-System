@@ -1,4 +1,4 @@
-import {useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { setLocalStorage } from "../components/addLocalStorage"
 import ModalBar from "../components/ModalBar";
 
@@ -14,11 +14,17 @@ const PatientsForm = ({ patientData, setPatientData }) => {
   const [contact, setContact] = useState("");
   const [action, setAction] = useState("");
   const [active, setActive] = useState("");
-  const [modal, setModal] = useState(false)
+  const [modal, setModal] = useState({
+    open: false,
+    func: "",
+    title: "",
+    description: "",
+    icon: ""
+  })
 
-  useEffect(()=>{ // run logic after components update 
-    if(dob) getAge()
-  },[dob])
+  useEffect(() => { // run logic after components update 
+    if (dob) getAge()
+  }, [dob])
 
   const setID = () => {
     let rawID = JSON.parse(localStorage.getItem("patientData")).at(-1).id
@@ -29,30 +35,46 @@ const PatientsForm = ({ patientData, setPatientData }) => {
     return id
   }
 
-  const getAge = () =>{
+  const getAge = () => {
     let today = new Date()
     let DOB = dob.split("-").join("")
 
-    let year = Number(DOB.slice(0,4)) ; let month = Number(DOB.slice(4,6)) ; let day = Number(DOB.slice(6,8))
+    let year = Number(DOB.slice(0, 4)); let month = Number(DOB.slice(4, 6)); let day = Number(DOB.slice(6, 8))
     let age = today.getFullYear() - year
-    
-    if(today.getMonth()<month || (today.getDay()<day && today.getMonth()===month)){
+
+    if (today.getMonth() < month || (today.getDay() < day && today.getMonth() === month)) {
       age--
     }
-    
+
     setAge(age)
   }
 
-  const addPatient = () => {
+  const validateForm = () => {
     if (!fname || !lname || !email || !age || !gender || !blood || !contact || !action || !active || !dob) {
-      setModal(false)
+      setModal({
+        open: true,
+        func: null,
+        title: "Missing Fields",
+        description: "Please fill all required fields before continuing.",
+        icon: "ri-error-warning-line text-red-500"
+      })
       return
     }
+    setModal({
+      open: true,
+      func: addPatient,
+      title: "Registration",
+      description: "Confirm the registration of this patient?",
+      icon: "ri-add-line"
+    })
+  }
+
+  const addPatient = () => {
 
     setPatientData(prev => [...prev, { "id": setID(), "fname": fname, "lname": lname, "email": email, "age": age, "gender": gender, "blood": blood, "contact": contact, "action": action, "active": active }])
 
-    setFName(""); setLName(""); setEmail(""); setAge(""); setGender(""); setPassword(""); setBlood(""); setContact(""); setAction(""); setActive("");setDOB("")
-    setModal(false)
+    setFName(""); setLName(""); setEmail(""); setAge(""); setGender(""); setPassword(""); setBlood(""); setContact(""); setAction(""); setActive(""); setDOB("")
+    setModal((prev)=>({...prev ,open:false}))
   }
 
 
@@ -129,10 +151,10 @@ const PatientsForm = ({ patientData, setPatientData }) => {
             <input
               value={age}
               readOnly
-              onChange={(e)=>setAge(e.target.value)}
+              onChange={(e) => setAge(e.target.value)}
               className="w-full bg-slate-50 border border-slate-200 rounded-lg px-5 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
               required
-              />
+            />
           </div>
 
           <div>
@@ -175,16 +197,16 @@ const PatientsForm = ({ patientData, setPatientData }) => {
 
         <div className="grid grid-cols-3 gap-5 items-center">
 
-        <div>
-          <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
-            Contact
-          </label>
-          <input
-            value={contact}
-            onChange={(e) => setContact(e.target.value)}
-            className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
-          />
-        </div>
+          <div>
+            <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
+              Contact
+            </label>
+            <input
+              value={contact}
+              onChange={(e) => setContact(e.target.value)}
+              className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500/20 outline-none"
+            />
+          </div>
           <div className="w-full">
             <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
               Action
@@ -222,17 +244,17 @@ const PatientsForm = ({ patientData, setPatientData }) => {
         <button
           type="button"
           className="w-full mt-5 bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-200"
-          onClick={() => setModal(true)}>
+          onClick={() => validateForm()}>
           Add Patient
         </button>
-        {modal && (
+        {modal.open && (
           <ModalBar
-            isOpen={modal}
-            onClose={() => setModal(false)}
-            onConfirm={addPatient}
-            title="Registration"
-            description="Confirm the registration of this patient?"
-            icon="ri-add-line"
+            isOpen={modal.open}
+            onClose={(prev) => setModal({ ...prev, open: false })}
+            onConfirm={modal.func}
+            title={modal.title}
+            description={modal.description}
+            icon={modal.icon}
           />
         )}
 

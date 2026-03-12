@@ -1,4 +1,3 @@
-
 const ModalBar = ({
   isOpen,
   onClose,
@@ -7,7 +6,7 @@ const ModalBar = ({
   description,
   icon
 }) => {
- 
+  
   if (!isOpen) return null
 
   return (
@@ -31,13 +30,16 @@ const ModalBar = ({
         </div>
 
         <div className="flex justify-end gap-2 mt-6">
-          <button
-            type="button"
-            onClick={onConfirm}
-            className="px-4 py-2 bg-teal-500 hover:bg-teal-600 text-white rounded"
-          >
-            Confirm
-          </button>
+          {
+            onConfirm!=null && 
+            <button
+              type="button"
+              onClick={onConfirm}
+              className="px-4 py-2 bg-teal-500 hover:bg-teal-600 text-white rounded"
+            >
+              Confirm
+            </button>
+          }
           <button
             type="button"
             onClick={onClose}
