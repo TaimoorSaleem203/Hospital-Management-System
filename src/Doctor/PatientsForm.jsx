@@ -51,7 +51,7 @@ const PatientsForm = ({ patientData, setPatientData }) => {
 
     setPatientData(prev => [...prev, { "id": setID(), "fname": fname, "lname": lname, "email": email, "age": age, "gender": gender, "blood": blood, "contact": contact, "action": action, "active": active }])
 
-    setFName(""); setLName(""); setEmail(""); setAge(""); setGender(""); setPassword(""); setBlood(""); setContact(""); setAction(""); setActive("")
+    setFName(""); setLName(""); setEmail(""); setAge(""); setGender(""); setPassword(""); setBlood(""); setContact(""); setAction(""); setActive("");setDOB("")
     setModal(false)
   }
 

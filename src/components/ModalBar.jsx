@@ -20,8 +20,8 @@ const ModalBar = ({
       >
 
         <div className="flex gap-4 items-start">
-          <div className="rounded-full bg-gray-200 px-3 py-2">
-            <i className={icon}></i>
+          <div className="rounded-full bg-gray-200 px-2 py-1">
+            <i className={`${icon} text-xl`}></i>
           </div>
 
           <div className="w-full flex flex-col text-start gap-1">

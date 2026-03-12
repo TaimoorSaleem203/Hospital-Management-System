@@ -13,7 +13,13 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
     const [search, setSearch] = useState("")
     const [result, setResult] = useState([])
     const [disabled, setDisabled] = useState(false)
-    const [modal, setModal] = useState(false)
+    const [modal, setModal] = useState({
+        open: false,
+        func: null,
+        title: "",
+        description: "",
+        icon: ""
+    })
 
     const setID = () => {
         let patients = getLocalStorage()
@@ -51,7 +57,13 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
 
     const validateForm = () => {
         if (!fname || !lname || date == "mm/dd/yyyy" || time == "--:-- --" || !reason || !action) {
-            alert("Please fill all required fields")
+            setModal({
+                open: true,
+                func:null,
+                title: "Missing Fields",
+                description: "Please fill all required fields before continuing.",
+                icon: "ri-error-warning-line text-red-500"
+            })
             return
         }
         let id = setID();
@@ -61,26 +73,34 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
 
         for (let i = 0; i < allID.length; i++) {
             if (id == allID[i]) {
-                alert("Patient's Appointment already registered. One appointment at a time!")
+                setModal({
+                    open: true,
+                    func:null,
+                    title: "Duplicate Appointment",
+                    description: "Patient already has an appointment registered.",
+                    icon: "ri-error-warning-line text-red-500"
+                })
                 return
             }
         }
 
-        if (!id) {
-            alert("Patient not found. Please register patient first.")
-            return
-        }
-        setModal(true)
+        setModal({
+            open: true,
+            func:AppointmentAdd,
+            title: "Appointment Reservation",
+            description: "Confirm the registration of patient's appointment?",
+            icon: "ri-heart-add-2-line"
+        })
     }
 
     const AppointmentAdd = (e) => {
         e.preventDefault()
 
         let id = setID();
-
+        
         setAppoint(prev => [...prev, { "id": id, "fname": fname, "lname": lname, "date": date, "time": time, "reason": reason, "action": action }])
-        setFName(""); setLName(""); setDate(""); setTime(""); setReason(""); setAction("")
-        setModal(false)
+        setFName(""); setLName(""); setDate(""); setTime(""); setReason(""); setAction("");
+        setModal(!modal.open)
     }
     setAppointment(appoint)
 
@@ -148,7 +168,8 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
                         </label>
                         <input
                             className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-1 focus:ring-blue-500/20 outline-none"
-                            type="time" value={time} onChange={(e) => setTime(e.target.value)} />
+                            type="time" value={time} onChange={(e) => setTime(e.target.value)}
+                             />
                     </div>
                 </div>
 
@@ -192,12 +213,12 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
                 </button>
                 {modal && (
                     <ModalBar
-                        isOpen={modal}
-                        onClose={() => setModal(false)}
-                        onConfirm={AppointmentAdd}
-                        title="Appointment Reservation"
-                        description="Confirm the registration of patient's appointment?"
-                        icon="ri-heart-add-2-line"
+                        isOpen={modal.open}
+                        onClose={() => setModal((prev) => ({ ...prev, open: false }))}
+                        onConfirm={modal.func}
+                        title={modal.title}
+                        description={modal.description}
+                        icon={modal.icon}
                     />
                 )}
             </form>
