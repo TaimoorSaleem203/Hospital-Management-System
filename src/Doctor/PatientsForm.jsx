@@ -22,12 +22,16 @@ const PatientsForm = ({ patientData, setPatientData }) => {
     icon: ""
   })
 
-  useEffect(() => { // run logic after components update 
+  useEffect(() => {
     if (dob) getAge()
   }, [dob])
 
+  useEffect(()=>{
+    setLocalStorage(patientData)
+  }, [patientData])
+
   const setID = () => {
-    let rawID = JSON.parse(localStorage.getItem("patientData")).at(-1).id
+    let rawID = JSON.parse(localStorage.getItem("patientData")).at(-1).id || "P001"
     let seq = parseInt(rawID.replace("P", ""))
     seq++
 
@@ -69,16 +73,13 @@ const PatientsForm = ({ patientData, setPatientData }) => {
     })
   }
 
-  const addPatient = () => {
-
+  const addPatient = (e) => {
+    e.preventDefault()
     setPatientData(prev => [...prev, { "id": setID(), "fname": fname, "lname": lname, "email": email, "age": age, "gender": gender, "blood": blood, "contact": contact, "action": action, "active": active }])
 
-    setFName(""); setLName(""); setEmail(""); setAge(""); setGender(""); setPassword(""); setBlood(""); setContact(""); setAction(""); setActive(""); setDOB("")
-    setModal((prev)=>({...prev ,open:false}))
+    setFName(""); setLName(""); setEmail(""); setAge(""); setGender(""); setBlood(""); setContact(""); setAction(""); setActive(""); setDOB("")
+    setModal((prev)=>({...prev,open:false}))
   }
-
-
-  setLocalStorage(patientData)
 
   return (
     <div className="mb-10 mt-[70px] p-8 w-full h-full flex bg-white border shadow-sm rounded-2xl flex-col gap-5">

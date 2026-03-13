@@ -1,22 +1,27 @@
-import { useState } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { setLocalStorage } from "../components/addLocalStorage"
 import ModalBar from "../components/ModalBar";
 
 const PatientTable = ({ patientData, setPatientData }) => {
 
-
     const [search, setSearch] = useState("")
     const [modal, setModal] = useState(false)
+    const [selectedIndex, setSelectedIndex] = useState(null)
 
     const onDelete = (indx) => {
         setPatientData(patientData.filter((item, index) => index !== indx))
         setModal(!modal);
     }
 
-    const searchPatient = patientData.filter((patient) => { return patient.id.toLowerCase().includes(search.toLowerCase()) || patient.fname.toLowerCase().includes(search.toLowerCase()) || patient.lname.toLowerCase().includes(search.toLowerCase()) })
-    setLocalStorage(patientData)
+    const searchPatient = useMemo(() => {
+        return patientData.filter((patient) => {
+            return patient.id.toLowerCase().includes(search.toLowerCase()) || patient.fname.toLowerCase().includes(search.toLowerCase()) || patient.lname.toLowerCase().includes(search.toLowerCase())
+        })
+    }, [search, patientData])
 
-    let indx;
+    useEffect(() => {
+        setLocalStorage(patientData)
+    }, [patientData])
 
     return (
         <>
@@ -63,9 +68,8 @@ const PatientTable = ({ patientData, setPatientData }) => {
 
 
                                 {searchPatient.map((patient, index) => {
-                                    indx = index
                                     return (
-                                        <tr key={index} className="bg-slate-50 border-b border-slate-200 hover:bg-slate-100 border-y-1 cursor-pointer">
+                                        <tr key={patient.id} className="bg-slate-50 border-b border-slate-200 hover:bg-slate-100 border-y-1 cursor-pointer">
                                             <td className='px-6 py-4 font-semibold text-slate-700 uppercase leading-2 tracking-wider'>{patient.id}</td>
                                             <td className='px-6 py-4 font-semibold text-slate-700 leading-2'>{patient.fname} {patient.lname}</td>
                                             <td className='px-6 py-4 font-semibold text-slate-700 leading-2'>{patient.age} / {patient.gender}</td>
@@ -77,6 +81,7 @@ const PatientTable = ({ patientData, setPatientData }) => {
                                                 e.preventDefault()
                                                 e.stopPropagation()
                                                 setModal(true)
+                                                setSelectedIndex(index)
                                             }} className="ri-delete-bin-fill"></i></td>
                                         </tr>
 
@@ -88,8 +93,8 @@ const PatientTable = ({ patientData, setPatientData }) => {
                                         <ModalBar
                                             isOpen={modal}
                                             onClose={() => setModal(false)}
-                                            onConfirm={() => { 
-                                                onDelete(indx);  
+                                            onConfirm={() => {
+                                                onDelete(selectedIndex);
                                             }}
                                             title="Delete"
                                             description="Would you like to delete this record?"

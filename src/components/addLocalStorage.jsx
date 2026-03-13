@@ -1,6 +1,6 @@
 
 export const setLocalStorage = (patientData) =>{
-    return localStorage.setItem("patientData",JSON.stringify(patientData))
+     localStorage.setItem("patientData",JSON.stringify(patientData))
 }
 
 export const getLocalStorage = () => {
@@ -10,7 +10,7 @@ export const getLocalStorage = () => {
 }
 
 export const setAppointment = (appointData) =>{
-    return localStorage.setItem("appointData",JSON.stringify(appointData))
+    localStorage.setItem("appointData",JSON.stringify(appointData))
 }
 
 export const getAppointment = () =>{

@@ -21,11 +21,12 @@ const LogOut = () => {
                 <ModalBar
                     isOpen={modal.open}
                     onConfirm={()=>navigate(modal.func,{replace:true})}
-                    onClose={() => setModal((prev) => ({ ...prev, open: false }))}
+                    onClose={()=>setModal((prev) => ({ ...prev, open: false }))}
                     title="Log Out"
                     description="Would you like to exit from this portal"
-                    icon="ri-logout-circle-r-line"
-                />}
+                    icon="ri-logout-box-r-line"
+                />
+            }
 
         </>
     )
