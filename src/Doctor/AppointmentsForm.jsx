@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { setAppointment, getLocalStorage, getAppointment } from "../components/addLocalStorage";
+import { setAppointment, getPatient, getAppointment } from "../components/addLocalStorage";
 import ModalBar from "../components/ModalBar";
 
 const AppointmentsForm = ({ appoint, setAppoint }) => {
@@ -22,17 +22,17 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
     })
 
     const setID = () => {
-        let patients = getLocalStorage()
+        let patients = getPatient()
 
         let matchedPatient = patients.find((patient) => {
             return fname.charAt(0).toUpperCase() + fname.slice(1).toLowerCase() == patient.fname && lname.charAt(0).toUpperCase() + lname.slice(1).toLowerCase() == patient.lname
         })
 
-        return matchedPatient.id
+        return matchedPatient ? matchedPatient.id : undefined
     }
 
     const searchData = (value) => {
-        let patients = getLocalStorage()
+        let patients = getPatient()
         let searchValue = value.toLowerCase()
 
         setSearch(searchValue)
@@ -59,7 +59,7 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
         if (!fname || !lname || date == "mm/dd/yyyy" || time == "--:-- --" || !reason || !action) {
             setModal({
                 open: true,
-                func:null,
+                func: null,
                 title: "Missing Fields",
                 description: "Please fill all required fields before continuing.",
                 icon: "ri-error-warning-line text-red-500"
@@ -70,12 +70,24 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
 
         let appointments = getAppointment();
         let allID = appointments.map((item) => { return item.id });
+        
+        
+        if(id==undefined) {
+            setModal({
+                open: true,
+                func: null,
+                title: "Patient Not Yet Registered",
+                description: "Entered info do not match any records.",
+                icon: "ri-error-warning-line text-red-500"
+            })
+            return
+        }
 
         for (let i = 0; i < allID.length; i++) {
             if (id == allID[i]) {
                 setModal({
                     open: true,
-                    func:null,
+                    func: null,
                     title: "Duplicate Appointment",
                     description: "Patient already has an appointment registered.",
                     icon: "ri-error-warning-line text-red-500"
@@ -86,9 +98,9 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
 
         setModal({
             open: true,
-            func:AppointmentAdd,
+            func: AppointmentAdd,
             title: "Appointment Reservation",
-            description: "Confirm the registration of patient's appointment?",
+            description: "Confirm the registration of patient's appointment.",
             icon: "ri-heart-add-2-line"
         })
     }
@@ -97,7 +109,7 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
         e.preventDefault()
 
         let id = setID();
-        
+
         setAppoint(prev => [...prev, { "id": id, "fname": fname, "lname": lname, "date": date, "time": time, "reason": reason, "action": action }])
         setFName(""); setLName(""); setDate(""); setTime(""); setReason(""); setAction("");
         setModal(!modal.open)
@@ -169,7 +181,7 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
                         <input
                             className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2 text-sm focus:ring-1 focus:ring-blue-500/20 outline-none"
                             type="time" value={time} onChange={(e) => setTime(e.target.value)}
-                             />
+                        />
                     </div>
                 </div>
 

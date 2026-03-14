@@ -43,7 +43,7 @@ const ModalBar = ({
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 border rounded"
+            className={`${onConfirm==null && "bg-teal-500 hover:bg-teal-600 text-white"} px-4 py-2 border rounded`}
           >
             Cancel
           </button>

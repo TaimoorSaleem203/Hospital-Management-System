@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react"
-import { setLocalStorage } from "../components/addLocalStorage"
+import { setPatient } from "../components/addLocalStorage"
 import ModalBar from "../components/ModalBar";
 
 const PatientTable = ({ patientData, setPatientData }) => {
@@ -8,20 +8,21 @@ const PatientTable = ({ patientData, setPatientData }) => {
     const [modal, setModal] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState(null)
 
+    useEffect(() => {
+        setPatient(patientData)
+    }, [patientData])
+
     const onDelete = (indx) => {
         setPatientData(patientData.filter((item, index) => index !== indx))
-        setModal(!modal);
+        setModal(false);
     }
 
     const searchPatient = useMemo(() => {
         return patientData.filter((patient) => {
-            return patient.id.toLowerCase().includes(search.toLowerCase()) || patient.fname.toLowerCase().includes(search.toLowerCase()) || patient.lname.toLowerCase().includes(search.toLowerCase())
+            return patient?.id?.toLowerCase().includes(search.toLowerCase()) || patient?.fname.toLowerCase().includes(search.toLowerCase()) || patient?.lname.toLowerCase().includes(search.toLowerCase())
         })
     }, [search, patientData])
 
-    useEffect(() => {
-        setLocalStorage(patientData)
-    }, [patientData])
 
     return (
         <>

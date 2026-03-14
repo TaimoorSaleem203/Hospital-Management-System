@@ -1,11 +1,11 @@
 import PatientTable from "./PatientTable"
 import DoctorPanel from './DoctorPanel'
 import DoctorHeader from './DoctorHeader'
-import { getLocalStorage } from "../components/addLocalStorage"
+import { getPatient } from "../components/addLocalStorage.jsx"
 import { useState } from "react"
 
 const PatientsDirectory = () => {
-  const [patientData, setPatientData] = useState(() => getLocalStorage())
+  const [patientData, setPatientData] = useState(getPatient)
 
   return (
     <>

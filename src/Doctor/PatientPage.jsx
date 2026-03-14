@@ -2,11 +2,11 @@ import { useState } from 'react'
 import PatientsForm from './PatientsForm'
 import DoctorPanel from './DoctorPanel'
 import DoctorHeader from './DoctorHeader'
-import { getLocalStorage } from "../components/addLocalStorage"
+import { getPatient } from "../components/addLocalStorage"
 
 const PatientPage = () => {
 
-  const [patientData, setPatientData] = useState(()=>getLocalStorage())
+  const [patientData, setPatientData] = useState(getPatient)
 
   return (
     <>

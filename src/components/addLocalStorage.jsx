@@ -1,20 +1,25 @@
-
-export const setLocalStorage = (patientData) =>{
-     localStorage.setItem("patientData",JSON.stringify(patientData))
+export const setPatient = (patientData) => {
+    localStorage.setItem("patientData", JSON.stringify(patientData))
 }
 
-export const getLocalStorage = () => {
-    const rawData = localStorage.getItem("patientData")
-    if(!rawData) return []
-    return JSON.parse(rawData)
+export const getPatient = () => {
+    try {
+        const rawData = localStorage.getItem("patientData")
+        return rawData ? JSON.parse(rawData) : []
+    } catch {
+        return []
+    }
 }
 
-export const setAppointment = (appointData) =>{
-    localStorage.setItem("appointData",JSON.stringify(appointData))
+export const setAppointment = (appointData) => {
+    localStorage.setItem("appointData", JSON.stringify(appointData))
 }
 
-export const getAppointment = () =>{
-    const rawData = localStorage.getItem("appointData")
-    if(!rawData) return []
-    return JSON.parse(rawData)
+export const getAppointment = () => {
+    try {
+        const rawData = localStorage.getItem("appointData")
+        return rawData ? JSON.parse(rawData) : []
+    } catch {
+        return []
+    }
 }

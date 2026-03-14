@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { setLocalStorage } from "../components/addLocalStorage"
+import { setPatient } from "../components/addLocalStorage"
 import ModalBar from "../components/ModalBar";
 
 const PatientsForm = ({ patientData, setPatientData }) => {
@@ -23,15 +23,19 @@ const PatientsForm = ({ patientData, setPatientData }) => {
   })
 
   useEffect(() => {
-    if (dob) getAge()
+    if (!dob) return
+    getAge()
   }, [dob])
 
-  useEffect(()=>{
-    setLocalStorage(patientData)
+  useEffect(() => {
+    setPatient(patientData)
   }, [patientData])
 
   const setID = () => {
-    let rawID = JSON.parse(localStorage.getItem("patientData")).at(-1).id || "P001"
+    let rawID = JSON.parse(localStorage.getItem("patientData"))?.at(-1)?.id
+
+    if (rawID == undefined) rawID = "P000"
+
     let seq = parseInt(rawID.replace("P", ""))
     seq++
 
@@ -53,6 +57,15 @@ const PatientsForm = ({ patientData, setPatientData }) => {
     setAge(age)
   }
 
+  const addPatient = (e) => {
+    e.preventDefault()
+
+    setPatientData(prev => [...prev, { "id": setID(), "fname": fname, "lname": lname, "email": email, "age": age, "gender": gender, "blood": blood, "contact": contact, "action": action, "active": active }])
+
+    setFName(""); setLName(""); setEmail(""); setAge(""); setGender(""); setBlood(""); setContact(""); setAction(""); setActive(""); setDOB("")
+    setModal((prev) => ({ ...prev, open: false }))
+  }
+
   const validateForm = () => {
     if (!fname || !lname || !email || !age || !gender || !blood || !contact || !action || !active || !dob) {
       setModal({
@@ -64,21 +77,35 @@ const PatientsForm = ({ patientData, setPatientData }) => {
       })
       return
     }
+    let dupEmail = patientData.find((patient) => patient.email == email)
+    let dupContact = patientData.find((patient) => patient.contact == contact)
+
+    if (dupEmail != undefined) {
+      setModal({
+        open: true,
+        func: null,
+        title: "Duplicate Email Found",
+        description: "Please fill the required field with another email.",
+        icon: "ri-error-warning-line text-red-500"
+      })
+      return
+    }else if (dupContact != undefined) {
+      setModal({
+        open: true,
+        func: null,
+        title: "Duplicate Contact Found",
+        description: "Please fill the required field with another contact.",
+        icon: "ri-error-warning-line text-red-500"
+      })
+      return
+    }
     setModal({
       open: true,
       func: addPatient,
       title: "Registration",
-      description: "Confirm the registration of this patient?",
+      description: "Confirm the registration of this patient",
       icon: "ri-add-line"
     })
-  }
-
-  const addPatient = (e) => {
-    e.preventDefault()
-    setPatientData(prev => [...prev, { "id": setID(), "fname": fname, "lname": lname, "email": email, "age": age, "gender": gender, "blood": blood, "contact": contact, "action": action, "active": active }])
-
-    setFName(""); setLName(""); setEmail(""); setAge(""); setGender(""); setBlood(""); setContact(""); setAction(""); setActive(""); setDOB("")
-    setModal((prev)=>({...prev,open:false}))
   }
 
   return (
@@ -245,7 +272,7 @@ const PatientsForm = ({ patientData, setPatientData }) => {
         <button
           type="button"
           className="w-full mt-5 bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-200"
-          onClick={() => validateForm()}>
+          onClick={validateForm}>
           Add Patient
         </button>
         {modal.open && (
