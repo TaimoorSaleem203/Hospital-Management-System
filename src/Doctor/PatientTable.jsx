@@ -5,7 +5,13 @@ import ModalBar from "../components/ModalBar";
 const PatientTable = ({ patientData, setPatientData }) => {
 
     const [search, setSearch] = useState("")
-    const [modal, setModal] = useState(false)
+    const [modal, setModal] = useState({
+        open: false,
+        func: "",
+        title: "",
+        description: "",
+        icon: ""
+    })
     const [selectedIndex, setSelectedIndex] = useState(null)
 
     useEffect(() => {
@@ -50,8 +56,8 @@ const PatientTable = ({ patientData, setPatientData }) => {
                         </div>
                     </div>
 
-                    <div className="overflow-x-auto relative">
-                        <table className="w-full text-center">
+                    <div className="overflow-hidden relative">
+                        <table className="w-full max-w-full text-center">
                             <thead>
                                 <tr className="bg-slate-50 border-b border-slate-200 border-y-2">
                                     <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Patient ID</th>
@@ -61,7 +67,8 @@ const PatientTable = ({ patientData, setPatientData }) => {
                                     <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Contact</th>
                                     <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Action</th>
                                     <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Status</th>
-                                    <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Delete</th>
+                                    <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Edit</th>
+                                    {/* <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Delete</th> */}
                                 </tr>
                             </thead>
 
@@ -70,7 +77,7 @@ const PatientTable = ({ patientData, setPatientData }) => {
 
                                 {searchPatient.map((patient, index) => {
                                     return (
-                                        <tr key={patient.id} className="bg-slate-50 border-b border-slate-200 hover:bg-slate-100 border-y-1 cursor-pointer">
+                                        <tr key={patient.id} className="relative bg-slate-50 border-b border-slate-200 hover:bg-slate-100 border-y-1 cursor-pointer">
                                             <td className='px-6 py-4 font-semibold text-slate-700 uppercase leading-2 tracking-wider'>{patient.id}</td>
                                             <td className='px-6 py-4 font-semibold text-slate-700 leading-2'>{patient.fname} {patient.lname}</td>
                                             <td className='px-6 py-4 font-semibold text-slate-700 leading-2'>{patient.age} / {patient.gender}</td>
@@ -78,28 +85,45 @@ const PatientTable = ({ patientData, setPatientData }) => {
                                             <td className='px-6 py-4 font-semibold text-slate-700 leading-2'>{patient.contact}</td>
                                             <td className='px-6 py-4 font-semibold text-slate-700 leading-2'>{patient.action}</td>
                                             {patient.active == "Active" ? <td className='px-6 py-4 text-1xl font-semibold text-green-700 leading-2'>Active</td> : <td className='px-6 py-4 text-1xl font-semibold text-red-700 leading-2'>Block</td>}
-                                            <td className='px-6 py-4 hover:text-red-700 font-semibold text-slate-700 leading-2'><i onClick={(e) => {
-                                                e.preventDefault()
-                                                e.stopPropagation()
-                                                setModal(true)
-                                                setSelectedIndex(index)
-                                            }} className="ri-delete-bin-fill"></i></td>
+                                            <td className="px-6 py-6 flex items-center justify-center gap-2">
+                                                <td className=' hover:text-cyan-700 font-semibold text-slate-700 leading-2'><i onClick={(e) => {
+                                                    e.preventDefault()
+                                                    e.stopPropagation()
+                                                    setModal({
+                                                        open: true,
+                                                        func: null,
+                                                        title: "Edit",
+                                                        description: "Would you like to edit this record?",
+                                                        icon: "ri-edit-fill"
+                                                    })
+                                                    setSelectedIndex(index)
+                                                }} className="ri-edit-fill"></i></td>
+                                                <span className="text-slate-700">|</span>
+                                                <td className=' hover:text-red-700 font-semibold text-slate-700 leading-2'><i onClick={(e) => {
+                                                    e.preventDefault()
+                                                    e.stopPropagation()
+                                                    setModal({
+                                                        open: true,
+                                                        func: null,
+                                                        title: "Delete",
+                                                        description: "Would you like to delete this record?",
+                                                        icon: "ri-delete-bin-fill"
+                                                    })
+                                                    setSelectedIndex(index)
+                                                }} className="ri-delete-bin-fill"></i></td>
+                                            </td>
                                         </tr>
-
                                     )
                                 })}
-
                                 {
-                                    modal && (
+                                    modal.open && (
                                         <ModalBar
-                                            isOpen={modal}
-                                            onClose={() => setModal(false)}
-                                            onConfirm={() => {
-                                                onDelete(selectedIndex);
-                                            }}
-                                            title="Delete"
-                                            description="Would you like to delete this record?"
-                                            icon="ri-delete-bin-line"
+                                            isOpen={modal.open}
+                                            onClose={()=>{setModal((prev) => ({ ...prev, open: false }))}}
+                                            onConfirm={modal.func}
+                                            title={modal.title}
+                                            description={modal.description}
+                                            icon={modal.icon}
                                         />
                                     )
                                 }
