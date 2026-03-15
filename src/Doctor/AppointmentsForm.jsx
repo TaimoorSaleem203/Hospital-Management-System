@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { setAppointment, getPatient, getAppointment } from "../components/addLocalStorage";
 import ModalBar from "../components/ModalBar";
 
@@ -20,6 +20,11 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
         description: "",
         icon: ""
     })
+
+    useEffect(() => {
+        setAppointment(appoint)
+    }, [appoint])
+
 
     const setID = () => {
         let patients = getPatient()
@@ -55,6 +60,29 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
         setResult([])
     }
 
+    const onTimeChange = (time) => {
+        var timeSplit = time.split(':'),
+            hours,
+            minutes,
+            meridian;
+
+        var [hours, minutes] = timeSplit
+
+        if (hours > 12) {
+            meridian = 'PM';
+            hours -= 12;
+        } else if (hours < 12) {
+            meridian = 'AM';
+            if (hours == 0) {
+                hours = 12;
+            }
+        } else {
+            meridian = 'PM';
+        }
+
+        return (hours + ':' + minutes + ' ' + meridian);
+    }
+
     const validateForm = () => {
         if (!fname || !lname || date == "mm/dd/yyyy" || time == "--:-- --" || !reason || !action) {
             setModal({
@@ -69,10 +97,9 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
         let id = setID();
 
         let appointments = getAppointment();
-        let allID = appointments.map((item) => { return item.id });
-        
-        
-        if(id==undefined) {
+        let appointLst = appointments.map(({ id, date, time }) => ({ id, date, time }));
+
+        if (id == undefined) {
             setModal({
                 open: true,
                 func: null,
@@ -83,8 +110,8 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
             return
         }
 
-        for (let i = 0; i < allID.length; i++) {
-            if (id == allID[i]) {
+        for (let i = 0; i < appointLst.length; i++) {
+            if (id == appointLst[i].id) {
                 setModal({
                     open: true,
                     func: null,
@@ -94,7 +121,20 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
                 })
                 return
             }
+
+            if (date == appointLst[i].date && onTimeChange(time) == appointLst[i].time) {
+                setModal({
+                    open: true,
+                    func: null,
+                    title: "Appointment Time Error",
+                    description: "Patient already has registered an appointment at this time.",
+                    icon: "ri-error-warning-line text-red-500"
+                })
+                return
+            }
         }
+
+
 
         setModal({
             open: true,
@@ -110,12 +150,10 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
 
         let id = setID();
 
-        setAppoint(prev => [...prev, { "id": id, "fname": fname, "lname": lname, "date": date, "time": time, "reason": reason, "action": action }])
+        setAppoint(prev => [...prev, { "id": id, "fname": fname, "lname": lname, "date": date, "time": onTimeChange(time), "reason": reason, "action": action }])
         setFName(""); setLName(""); setDate(""); setTime(""); setReason(""); setAction("");
         setModal(!modal.open)
     }
-    setAppointment(appoint)
-
 
     return (
         <div className="min-w-full mx-auto p-8 h-full flex bg-white border shadow-sm rounded-2xl flex-col gap-5">
@@ -218,8 +256,8 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
 
                 <button
                     type="button"
-                    className="w-full mt-2 bg-primary-dark hover:bg-primary text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-200"
-                    onClick={() => validateForm()}
+                    className="w-full mt-5 bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-200"
+                    onClick={validateForm}
                 >
                     Add Appointment
                 </button>
