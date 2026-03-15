@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { setAppointment, getPatient, getAppointment } from "../components/addLocalStorage";
 import ModalBar from "../components/ModalBar";
+import SearchBar from "../components/SearchBar";
 
 const AppointmentsForm = ({ appoint, setAppoint }) => {
 
@@ -10,8 +11,6 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
     const [time, setTime] = useState("");
     const [reason, setReason] = useState("");
     const [action, setAction] = useState("");
-    const [search, setSearch] = useState("")
-    const [result, setResult] = useState([])
     const [disabled, setDisabled] = useState(false)
     const [modal, setModal] = useState({
         open: false,
@@ -34,30 +33,6 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
         })
 
         return matchedPatient ? matchedPatient.id : undefined
-    }
-
-    const searchData = (value) => {
-        let patients = getPatient()
-        let searchValue = value.toLowerCase()
-
-        setSearch(searchValue)
-
-        let result = patients.filter((patient) =>
-            patient.fname.toLowerCase().includes(searchValue) ||
-            patient.lname.toLowerCase().includes(searchValue) ||
-            patient.id.toLowerCase().includes(searchValue)
-        )
-
-        setResult(result)
-    }
-
-    const fetchData = (patient) => {
-        setFName(patient.fname)
-        setLName(patient.lname)
-
-        setDisabled(true)
-        setSearch("")
-        setResult([])
     }
 
     const onTimeChange = (time) => {
@@ -165,17 +140,7 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
             </div>
 
             <form className="relative flex flex-col gap-4 w-full">
-                <div className="border-b border-slate-200 pb-4">
-                    <i className="absolute flex items-center top-[9px] left-3 ri-search-line text-slate-500"></i>
-                    <input value={search} onChange={(e) => searchData(e.target.value)} type="text" placeholder="ID or Patients Name" className="min-w-full w-full pl-10 pr-50 outline-none bg-slate-50 px-4 py-2 border border-slate-200 mx-auto rounded-lg focus:ring-2 focus:ring-blue-500/20" />
-                    <span className={`${search.length == 0 && "hidden"} transition-all delay-150 duration-300 ease-in-out absolute p-3 flex flex-col gap-2 shadow-md min-w-full overflow-y-auto max-h-[300px] top-[50px] rounded-sm left-0 -z-1 bg-white`}>
-                        {search.length > 0 && result.map((item) => {
-                            return (
-                                <p onClick={() => { fetchData(item) }} className="w-full transition-all duration-150 p-3 rounded-lg cursor-pointer hover:bg-slate-100">{item.id}: {item.fname} {item.lname}</p>
-                            )
-                        })}
-                    </span>
-                </div>
+                <SearchBar setFName={setFName} setLName={setLName}/>
                 <div className="grid items-center grid-cols-2 gap-4">
                     <div>
                         <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">

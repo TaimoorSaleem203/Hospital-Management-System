@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { setPatient } from "../components/addLocalStorage"
 import ModalBar from "../components/ModalBar";
+import SearchBar from "../components/SearchBar";
 
 const PatientsForm = ({ patientData, setPatientData }) => {
 
@@ -60,7 +61,7 @@ const PatientsForm = ({ patientData, setPatientData }) => {
   const addPatient = (e) => {
     e.preventDefault()
 
-    setPatientData(prev => [...prev, { "id": setID(), "fname": fname, "lname": lname, "email": email, "age": age, "gender": gender, "blood": blood, "contact": contact, "action": action, "active": active }])
+    setPatientData(prev => [...prev, { "id": setID(), "fname": fname, "lname": lname, "email": email, "dob":dob, "age": age, "gender": gender, "blood": blood, "contact": contact, "action": action, "active": active }])
 
     setFName(""); setLName(""); setEmail(""); setAge(""); setGender(""); setBlood(""); setContact(""); setAction(""); setActive(""); setDOB("")
     setModal((prev) => ({ ...prev, open: false }))
@@ -89,7 +90,7 @@ const PatientsForm = ({ patientData, setPatientData }) => {
         icon: "ri-error-warning-line text-red-500"
       })
       return
-    }else if (dupContact != undefined) {
+    } else if (dupContact != undefined) {
       setModal({
         open: true,
         func: null,
@@ -99,6 +100,7 @@ const PatientsForm = ({ patientData, setPatientData }) => {
       })
       return
     }
+
     setModal({
       open: true,
       func: addPatient,
@@ -118,9 +120,10 @@ const PatientsForm = ({ patientData, setPatientData }) => {
       </div>
 
       <form className="flex flex-col gap-3">
+        <SearchBar setFName={setFName} setLName={setLName} setEmail={setEmail} setDOB={setDOB} setAge={setAge} setGender={setGender} setBlood={setBlood} setContact={setContact} setAction={setAction} setActive={setActive}/>
         <div className="grid items-center grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
+            <label className="block text-xs font-semibold text-slate-500 uppercase mb-1"> 
               First Name
             </label>
             <input
@@ -273,7 +276,7 @@ const PatientsForm = ({ patientData, setPatientData }) => {
           type="button"
           className="w-full mt-5 bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-200"
           onClick={validateForm}>
-          Add Patient
+          {(fname.length > 0 && lname.length > 0) ? "Update Patient" : "Add Patient"}
         </button>
         {modal.open && (
           <ModalBar

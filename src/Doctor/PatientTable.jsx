@@ -67,7 +67,7 @@ const PatientTable = ({ patientData, setPatientData }) => {
                                     <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Contact</th>
                                     <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Action</th>
                                     <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Status</th>
-                                    <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Edit</th>
+                                    <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Delete</th>
                                     {/* <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Delete</th> */}
                                 </tr>
                             </thead>
@@ -85,33 +85,18 @@ const PatientTable = ({ patientData, setPatientData }) => {
                                             <td className='px-6 py-4 font-semibold text-slate-700 leading-2'>{patient.contact}</td>
                                             <td className='px-6 py-4 font-semibold text-slate-700 leading-2'>{patient.action}</td>
                                             {patient.active == "Active" ? <td className='px-6 py-4 text-1xl font-semibold text-green-700 leading-2'>Active</td> : <td className='px-6 py-4 text-1xl font-semibold text-red-700 leading-2'>Block</td>}
-                                            <td className="px-6 py-6 flex items-center justify-center gap-2">
-                                                <td className=' hover:text-cyan-700 font-semibold text-slate-700 leading-2'><i onClick={(e) => {
-                                                    e.preventDefault()
-                                                    e.stopPropagation()
-                                                    setModal({
-                                                        open: true,
-                                                        func: null,
-                                                        title: "Edit",
-                                                        description: "Would you like to edit this record?",
-                                                        icon: "ri-edit-fill"
-                                                    })
-                                                    setSelectedIndex(index)
-                                                }} className="ri-edit-fill"></i></td>
-                                                <span className="text-slate-700">|</span>
-                                                <td className=' hover:text-red-700 font-semibold text-slate-700 leading-2'><i onClick={(e) => {
-                                                    e.preventDefault()
-                                                    e.stopPropagation()
-                                                    setModal({
-                                                        open: true,
-                                                        func: null,
-                                                        title: "Delete",
-                                                        description: "Would you like to delete this record?",
-                                                        icon: "ri-delete-bin-fill"
-                                                    })
-                                                    setSelectedIndex(index)
-                                                }} className="ri-delete-bin-fill"></i></td>
-                                            </td>
+                                            <td className='px-6 py-4 hover:text-red-700 font-semibold text-slate-700 leading-2'><i onClick={(e) => {
+                                                e.preventDefault()
+                                                e.stopPropagation()
+                                                setModal({
+                                                    open: true,
+                                                    func: () => { onDelete(index) },
+                                                    title: "Delete",
+                                                    description: "Would you like to delete this record?",
+                                                    icon: "ri-delete-bin-fill"
+                                                })
+                                                setSelectedIndex(index)
+                                            }} className="ri-delete-bin-fill"></i></td>
                                         </tr>
                                     )
                                 })}
@@ -119,7 +104,7 @@ const PatientTable = ({ patientData, setPatientData }) => {
                                     modal.open && (
                                         <ModalBar
                                             isOpen={modal.open}
-                                            onClose={()=>{setModal((prev) => ({ ...prev, open: false }))}}
+                                            onClose={() => { setModal((prev) => ({ ...prev, open: false })) }}
                                             onConfirm={modal.func}
                                             title={modal.title}
                                             description={modal.description}
