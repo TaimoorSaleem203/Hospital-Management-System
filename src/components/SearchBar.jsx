@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { getPatient } from './addLocalStorage'
 
-const SearchBar = ({setFName,setLName,setEmail,setDOB,setGender,setContact,setBlood,setAge,setActive,setAction}) => {
+const SearchBar = ({setEditingId,setFormMode,setFName,setLName,setEmail,setDOB,setGender,setContact,setBlood,setAge,setActive,setAction}) => {
 
     const [search, setSearch] = useState("")
     const [result, setResult] = useState([])
@@ -34,6 +34,8 @@ const SearchBar = ({setFName,setLName,setEmail,setDOB,setGender,setContact,setBl
         setAction(patient.action)
         setActive(patient.active)
 
+        setFormMode("edit")
+        setEditingId(patient.id)
         setDisabled(true)
         setSearch("")
         setResult([])
