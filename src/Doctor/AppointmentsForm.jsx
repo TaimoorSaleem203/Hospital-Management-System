@@ -130,6 +130,11 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
         setModal(!modal.open)
     }
 
+    const handleSelectPatient = (patient) => {
+        setFName(patient.fname)
+        setLName(patient.lname)
+    }
+
     return (
         <div className="min-w-full mx-auto p-8 h-full flex bg-white border shadow-sm rounded-2xl flex-col gap-5">
             <div className="flex items-center justify-between mb-6">
@@ -140,7 +145,7 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
             </div>
 
             <form className="relative flex flex-col gap-4 w-full">
-                <SearchBar setFName={setFName} setLName={setLName}/>
+                <SearchBar onSelectPatient={handleSelectPatient} />
                 <div className="grid items-center grid-cols-2 gap-4">
                     <div>
                         <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">

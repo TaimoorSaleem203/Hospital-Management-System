@@ -72,9 +72,9 @@ const PatientsForm = ({ patientData, setPatientData }) => {
   const updatePatient = (e) => {
     e.preventDefault()
 
-    setPatientData(prev => prev.map((patient) => 
-      (patient.id === editingId ?
-        { ...patient, fname, lname, email, dob, age, gender, blood, contact, action, active } : patient
+    setPatientData(prev => prev.map((patient) =>
+    (patient.id === editingId ?
+      { ...patient, fname, lname, email, dob, age, gender, blood, contact, action, active } : patient
     )))
 
     setFName(""); setLName(""); setEmail(""); setAge(""); setGender(""); setBlood(""); setContact(""); setAction(""); setActive(""); setDOB("")
@@ -94,7 +94,7 @@ const PatientsForm = ({ patientData, setPatientData }) => {
       return
     }
 
-    if(editingId!=null){
+    if (editingId != null) {
       setModal({
         open: true,
         func: updatePatient,
@@ -128,8 +128,8 @@ const PatientsForm = ({ patientData, setPatientData }) => {
       })
       return
     }
-    
-    if(editingId==null){
+
+    if (editingId == null) {
       setModal({
         open: true,
         func: addPatient,
@@ -138,8 +138,26 @@ const PatientsForm = ({ patientData, setPatientData }) => {
         icon: "ri-add-line"
       })
     }
-    
+
   }
+
+  const handleSelectPatient = (patient) => {
+    setFName(patient.fname)
+    setLName(patient.lname)
+    setDOB(patient.dob)
+    setEmail(patient.email)
+    setAge(patient.age)
+    setGender(patient.gender)
+    setBlood(patient.blood)
+    setContact(patient.contact)
+    setAction(patient.action)
+    setActive(patient.active)
+
+    setFormMode("edit")
+    setEditingId(patient.id)
+  }
+
+  
 
   return (
     <div className="mb-10 mt-[70px] p-8 w-full h-full flex bg-white border shadow-sm rounded-2xl flex-col gap-5">
@@ -151,7 +169,7 @@ const PatientsForm = ({ patientData, setPatientData }) => {
       </div>
 
       <form className="flex flex-col gap-3">
-        <SearchBar setEditingId={setEditingId} setFormMode={setFormMode} setFName={setFName} setLName={setLName} setEmail={setEmail} setDOB={setDOB} setAge={setAge} setGender={setGender} setBlood={setBlood} setContact={setContact} setAction={setAction} setActive={setActive} />
+        <SearchBar onSelectPatient={handleSelectPatient} />
         <div className="grid items-center grid-cols-2 gap-4">
           <div>
             <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
@@ -307,7 +325,7 @@ const PatientsForm = ({ patientData, setPatientData }) => {
           type="button"
           className="w-full mt-5 bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-200"
           onClick={validateForm}>
-          {formMode === "edit" ? "Update Patient" : "Add Patient"}
+          {editingId !== null ? "Update Patient" : "Add Patient"}
         </button>
         {modal.open && (
           <ModalBar
