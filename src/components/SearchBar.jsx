@@ -62,7 +62,7 @@ const SearchBar = ({ onSelectPatient }) => {
             <span className={`${search.length == 0 && "hidden"} transition-all delay-150 duration-300 ease-in-out absolute p-3 flex flex-col gap-2 shadow-md min-w-full overflow-y-auto max-h-[300px] top-[50px] rounded-sm left-0 -z-1 bg-white`}>
                 {search.length > 0 && result.map((item, indx) => {
                     return (
-                        <p key={item.id} onClick={() => { fetchData(item) }} className={`w-full transition-all duration-150 p-3 rounded-lg cursor-pointer ${indx == activeIndex ? "bg-blue-100" : "hover:bg-slate-100"}`}>{item.id}: {item.fname} {item.lname}</p>
+                        <p key={item.id} onClick={() => {fetchData(item)}} className={`w-full transition-all duration-150 p-3 rounded-lg cursor-pointer ${indx == activeIndex ? "bg-blue-100" : "hover:bg-slate-100"}`}>{item.id}: {item.fname} {item.lname}</p>
                     )
                 })}
             </span>

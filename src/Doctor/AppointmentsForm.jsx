@@ -110,7 +110,6 @@ const AppointmentsForm = ({ appoint, setAppoint }) => {
         }
 
 
-
         setModal({
             open: true,
             func: AppointmentAdd,
