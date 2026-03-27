@@ -15,7 +15,7 @@ const DoctorHeader = () => {
                         <h4 className="text-text-heading font-semibold text-sm">Dr Smith</h4>
                         <p className="text-text-body text-xs font-medium tracking-wider">PREMIUM MEMBER</p>
                     </div>
-                    <img src={doctorProfile} className="max-w-[50px] mx-auto w-full cursor-pointer" alt="patientImg" />
+                    <img src={doctorProfile} className="border border-slate-200 rounded-full max-w-[50px] mx-auto w-full cursor-pointer" alt="patientImg" />
                 </div>
             </div>
 

@@ -157,7 +157,7 @@ const PatientsForm = ({ patientData, setPatientData }) => {
     setEditingId(patient.id)
   }
 
-  
+
 
   return (
     <div className="mb-10 mt-[70px] p-8 w-full h-full flex bg-white border shadow-sm rounded-2xl flex-col gap-5">
@@ -169,7 +169,12 @@ const PatientsForm = ({ patientData, setPatientData }) => {
       </div>
 
       <form className="flex flex-col gap-3">
-        <SearchBar onSelectPatient={handleSelectPatient} />
+        <div className="flex items-start justify-between flex-1">
+          <SearchBar onSelectPatient={handleSelectPatient} />
+          <span className="bg-blue-50 text-primary px-4 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
+            Update Patient
+          </span>
+        </div>
         <div className="grid items-center grid-cols-2 gap-4">
           <div>
             <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
